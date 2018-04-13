@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adoptPet.userInterface.mapper.AdoptinfoMapper">
+  <resultMap id="BaseResultMap" type="com.adoptPet.userInterface.entity.Adoptinfo">
+    <id column="serialNo" jdbcType="VARCHAR" property="serialno" />
+    <result column="uName" jdbcType="VARCHAR" property="uname" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image1" jdbcType="VARCHAR" property="image1" />
+    <result column="image2" jdbcType="VARCHAR" property="image2" />
+    <result column="image3" jdbcType="VARCHAR" property="image3" />
+    <result column="image4" jdbcType="VARCHAR" property="image4" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="question1" jdbcType="VARCHAR" property="question1" />
+    <result column="question2" jdbcType="VARCHAR" property="question2" />
+    <result column="question3" jdbcType="VARCHAR" property="question3" />
+    <result column="Ado_status" jdbcType="INTEGER" property="adoStatus" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="publishTime" jdbcType="DATE" property="publishtime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.adoptPet.userInterface.entity.Adoptinfo">
+    <result column="describes" jdbcType="LONGVARCHAR" property="describes" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    serialNo, uName, title, image1, image2, image3, image4, address, question1, question2, 
+    question3, Ado_status, type, publishTime
+  </sql>
+  <sql id="Blob_Column_List">
+    describes
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.adoptPet.userInterface.entity.AdoptinfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from adoptinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.adoptPet.userInterface.entity.AdoptinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adoptinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from adoptinfo
+    where serialNo = #{serialno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from adoptinfo
+    where serialNo = #{serialno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.adoptPet.userInterface.entity.AdoptinfoExample">
+    delete from adoptinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    insert into adoptinfo (serialNo, uName, title, 
+      image1, image2, image3, 
+      image4, address, question1, 
+      question2, question3, Ado_status, 
+      type, publishTime, describes
+      )
+    values (#{serialno,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR}, 
+      #{image4,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{question1,jdbcType=VARCHAR}, 
+      #{question2,jdbcType=VARCHAR}, #{question3,jdbcType=VARCHAR}, #{adoStatus,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{publishtime,jdbcType=DATE}, #{describes,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    insert into adoptinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serialno != null">
+        serialNo,
+      </if>
+      <if test="uname != null">
+        uName,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="image1 != null">
+        image1,
+      </if>
+      <if test="image2 != null">
+        image2,
+      </if>
+      <if test="image3 != null">
+        image3,
+      </if>
+      <if test="image4 != null">
+        image4,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="question1 != null">
+        question1,
+      </if>
+      <if test="question2 != null">
+        question2,
+      </if>
+      <if test="question3 != null">
+        question3,
+      </if>
+      <if test="adoStatus != null">
+        Ado_status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="publishtime != null">
+        publishTime,
+      </if>
+      <if test="describes != null">
+        describes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serialno != null">
+        #{serialno,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null">
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null">
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null">
+        #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null">
+        #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="question1 != null">
+        #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null">
+        #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null">
+        #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="adoStatus != null">
+        #{adoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null">
+        #{publishtime,jdbcType=DATE},
+      </if>
+      <if test="describes != null">
+        #{describes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.adoptPet.userInterface.entity.AdoptinfoExample" resultType="java.lang.Long">
+    select count(*) from adoptinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update adoptinfo
+    <set>
+      <if test="record.serialno != null">
+        serialNo = #{record.serialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null">
+        uName = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image1 != null">
+        image1 = #{record.image1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image2 != null">
+        image2 = #{record.image2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image3 != null">
+        image3 = #{record.image3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image4 != null">
+        image4 = #{record.image4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question1 != null">
+        question1 = #{record.question1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question2 != null">
+        question2 = #{record.question2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question3 != null">
+        question3 = #{record.question3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adoStatus != null">
+        Ado_status = #{record.adoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishtime != null">
+        publishTime = #{record.publishtime,jdbcType=DATE},
+      </if>
+      <if test="record.describes != null">
+        describes = #{record.describes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update adoptinfo
+    set serialNo = #{record.serialno,jdbcType=VARCHAR},
+      uName = #{record.uname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      image1 = #{record.image1,jdbcType=VARCHAR},
+      image2 = #{record.image2,jdbcType=VARCHAR},
+      image3 = #{record.image3,jdbcType=VARCHAR},
+      image4 = #{record.image4,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      question1 = #{record.question1,jdbcType=VARCHAR},
+      question2 = #{record.question2,jdbcType=VARCHAR},
+      question3 = #{record.question3,jdbcType=VARCHAR},
+      Ado_status = #{record.adoStatus,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      publishTime = #{record.publishtime,jdbcType=DATE},
+      describes = #{record.describes,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update adoptinfo
+    set serialNo = #{record.serialno,jdbcType=VARCHAR},
+      uName = #{record.uname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      image1 = #{record.image1,jdbcType=VARCHAR},
+      image2 = #{record.image2,jdbcType=VARCHAR},
+      image3 = #{record.image3,jdbcType=VARCHAR},
+      image4 = #{record.image4,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      question1 = #{record.question1,jdbcType=VARCHAR},
+      question2 = #{record.question2,jdbcType=VARCHAR},
+      question3 = #{record.question3,jdbcType=VARCHAR},
+      Ado_status = #{record.adoStatus,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      publishTime = #{record.publishtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    update adoptinfo
+    <set>
+      <if test="uname != null">
+        uName = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null">
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null">
+        image2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null">
+        image3 = #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null">
+        image4 = #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="question1 != null">
+        question1 = #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null">
+        question2 = #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null">
+        question3 = #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="adoStatus != null">
+        Ado_status = #{adoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null">
+        publishTime = #{publishtime,jdbcType=DATE},
+      </if>
+      <if test="describes != null">
+        describes = #{describes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where serialNo = #{serialno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    update adoptinfo
+    set uName = #{uname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      image3 = #{image3,jdbcType=VARCHAR},
+      image4 = #{image4,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      question1 = #{question1,jdbcType=VARCHAR},
+      question2 = #{question2,jdbcType=VARCHAR},
+      question3 = #{question3,jdbcType=VARCHAR},
+      Ado_status = #{adoStatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      publishTime = #{publishtime,jdbcType=DATE},
+      describes = #{describes,jdbcType=LONGVARCHAR}
+    where serialNo = #{serialno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    update adoptinfo
+    set uName = #{uname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      image3 = #{image3,jdbcType=VARCHAR},
+      image4 = #{image4,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      question1 = #{question1,jdbcType=VARCHAR},
+      question2 = #{question2,jdbcType=VARCHAR},
+      question3 = #{question3,jdbcType=VARCHAR},
+      Ado_status = #{adoStatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      publishTime = #{publishtime,jdbcType=DATE}
+    where serialNo = #{serialno,jdbcType=VARCHAR}
+  </update>
+</mapper>
