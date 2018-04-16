@@ -103,9 +103,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.adoptPet.userInterface.entity.User">
-    insert into user (uName, phoneNo, upwd, 
-      uAddress, signature, uimage, 
-      registerTime, urole)
+    insert into user (uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole)
     values (#{uname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
       #{uaddress,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{uimage,jdbcType=VARCHAR}, 
       #{registertime,jdbcType=DATE}, #{urole,jdbcType=INTEGER})

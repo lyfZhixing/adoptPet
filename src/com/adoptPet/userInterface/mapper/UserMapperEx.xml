@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adoptPet.userInterface.mapper.UserMapperEx">
+
+	<sql id="login_PhonePassword">
+		phoneno='${phoneno}' and upwd='${upwd}'
+	</sql>
+	<select id="loginByPhonePassword" resultType="int" parameterType="com.adoptPet.userInterface.entity.User">
+		select count(1) from user  
+		<where>
+			<include refid="login_PhonePassword"></include>
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="com.adoptPet.userInterface.entity.User">
+    insert into user (uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole)
+    values (#{uname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
+      #{uaddress,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{uimage,jdbcType=VARCHAR}, 
+      #{registertime,jdbcType=DATE}, #{urole,jdbcType=INTEGER})
+  </insert>
+</mapper>

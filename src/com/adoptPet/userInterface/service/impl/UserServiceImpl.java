@@ -3,19 +3,22 @@ package com.adoptPet.userInterface.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adoptPet.userInterface.entity.User;
 import com.adoptPet.userInterface.mapper.UserMapper;
+import com.adoptPet.userInterface.mapper.UserMapperEx;
 import com.adoptPet.userInterface.service.UserService;
 
 @Service
 public class UserServiceImpl<T> implements UserService<T> {
 
+	
 	@Autowired
-	private UserMapper<T> userMapper;
+	private UserMapperEx userMapperEx;
 	
 	@Override
-	public int saveUser(T t) throws Exception {
+	public int saveUser(User user) throws Exception {
 		
-		return userMapper.insert(t);
+		return userMapperEx.insert(user);
 	}
 
 	@Override
@@ -31,9 +34,11 @@ public class UserServiceImpl<T> implements UserService<T> {
 	}
 
 	@Override
-	public T findUserByPhonePassword(String phone, String password) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public int findUserByPhonePassword(String phoneNo, String upwd) throws Exception {
+		User user = new User();
+		user.setPhoneno(phoneNo);
+		user.setUpwd(upwd);
+		return userMapperEx.loginByPhonePassword(user);
 	}
 
 	@Override

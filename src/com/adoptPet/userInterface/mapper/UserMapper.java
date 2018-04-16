@@ -5,14 +5,14 @@ import com.adoptPet.userInterface.entity.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserMapper<T> {
+public interface UserMapper {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
 
     int deleteByPrimaryKey(String uname);
 
-    int insert(T t);
+    int insert(User user);
 
     int insertSelective(User record);
 
