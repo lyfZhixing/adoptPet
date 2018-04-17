@@ -5,7 +5,7 @@
         <div class="index-nav">
             <div class="logo"><img src="../img/logo.png" alt=""></div>
             <ul>
-                <a href="../index.jsp"><li>首页</li></a>
+                <a href="${pageContext.request.contextPath}/index/index.action"><li>首页</li></a>
                 <a href="#"><li>宠物圈</li></a>
                 <a href="#"><li>知识百科</li></a>
                 <a href="./personal.html"><li>个人中心</li></a>

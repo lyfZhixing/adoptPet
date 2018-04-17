@@ -17,12 +17,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alibaba.fastjson.JSONException;
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
+import com.github.qcloudsms.httpclient.HTTPException;
+
 @Controller
 public class VcodeController {
 
 	private static int WIDTH = 60;  
     private static int HEIGHT = 20;  
   
+    /**登录验证码*/
     @RequestMapping("/vcode")
     public void getVcode(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {  
@@ -97,5 +103,41 @@ public class VcodeController {
             g.setColor(new Color(red, green, blue));  
             g.drawOval(x, y, 1, 0);  
         }  
-    }  
+    }
+    
+    /**注册验证码*/
+    @RequestMapping("/sendsms")
+    public String sendsms(String phoneno){
+    	// 短信应用SDK AppID
+    	int appid = 1400085105; // 1400开头
+    	// 短信应用SDK AppKey
+    	String appkey = "e850804e45dfad1543577e48298f0bd7";
+    	// 需要发送短信的手机号码
+    	//String[] phoneNumbers = {"21212313123", "12345678902", "12345678903"};
+    	// 短信模板ID，需要在短信应用中申请
+    	int templateId = 7839; // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+    	// 签名
+    	String smsSign = "撩人的月色"; // NOTE: 这里的签名"腾讯云"只是一个示例，真实的签名需要在短信控制台中申请，另外签名参数使用的是`签名内容`，而不是`签名ID`
+    	// 产生随机的认证码   
+        char[] rands = generateCheckCode();
+    	try {
+    	    String[] params = {new String(rands),"2"};
+    	    SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
+    	    SmsSingleSenderResult result = ssender.sendWithParam("86", phoneno,
+    	        templateId, params, smsSign, "", "");  // 签名参数未提供或者为空时，会使用默认签名发送短信
+    	    System.out.print(result);
+    	} catch (HTTPException e) {
+    	    // HTTP响应码错误
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    	    // json解析错误
+    	    e.printStackTrace();
+    	} catch (IOException e) {
+    	    // 网络IO错误
+    	    e.printStackTrace();
+    	}
+    	
+    	return new String(rands);
+    }
+    
 }
