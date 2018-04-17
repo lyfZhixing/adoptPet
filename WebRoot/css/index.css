@@ -56,13 +56,13 @@ a:hover, a:visited, a:link, a:active {
     background: #00AA98;
 }
 
-.index-nav .message{
+.index-nav .message,.logoff{
     float: right;
     margin-right: 170px;
     color: #fff;
 }
 
-.index-nav .login{
+.index-nav .login,.uname{
     float: right;
     margin-right: 50px;
     color: #fff;

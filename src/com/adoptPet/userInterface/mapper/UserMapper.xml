@@ -8,7 +8,7 @@
     <result column="uAddress" jdbcType="VARCHAR" property="uaddress" />
     <result column="signature" jdbcType="VARCHAR" property="signature" />
     <result column="uimage" jdbcType="VARCHAR" property="uimage" />
-    <result column="registerTime" jdbcType="DATE" property="registertime" />
+    <result column="registerTime" jdbcType="TIMESTAMP" property="registertime" />
     <result column="urole" jdbcType="INTEGER" property="urole" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -106,7 +106,7 @@
     insert into user (uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole)
     values (#{uname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
       #{uaddress,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{uimage,jdbcType=VARCHAR}, 
-      #{registertime,jdbcType=DATE}, #{urole,jdbcType=INTEGER})
+      #{registertime,jdbcType=TIMESTAMP}, #{urole,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.adoptPet.userInterface.entity.User">
     insert into user
@@ -156,7 +156,7 @@
         #{uimage,jdbcType=VARCHAR},
       </if>
       <if test="registertime != null">
-        #{registertime,jdbcType=DATE},
+        #{registertime,jdbcType=TIMESTAMP},
       </if>
       <if test="urole != null">
         #{urole,jdbcType=INTEGER},
@@ -191,7 +191,7 @@
         uimage = #{record.uimage,jdbcType=VARCHAR},
       </if>
       <if test="record.registertime != null">
-        registerTime = #{record.registertime,jdbcType=DATE},
+        registerTime = #{record.registertime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.urole != null">
         urole = #{record.urole,jdbcType=INTEGER},
@@ -209,7 +209,7 @@
       uAddress = #{record.uaddress,jdbcType=VARCHAR},
       signature = #{record.signature,jdbcType=VARCHAR},
       uimage = #{record.uimage,jdbcType=VARCHAR},
-      registerTime = #{record.registertime,jdbcType=DATE},
+      registerTime = #{record.registertime,jdbcType=TIMESTAMP},
       urole = #{record.urole,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -234,7 +234,7 @@
         uimage = #{uimage,jdbcType=VARCHAR},
       </if>
       <if test="registertime != null">
-        registerTime = #{registertime,jdbcType=DATE},
+        registerTime = #{registertime,jdbcType=TIMESTAMP},
       </if>
       <if test="urole != null">
         urole = #{urole,jdbcType=INTEGER},
@@ -249,7 +249,7 @@
       uAddress = #{uaddress,jdbcType=VARCHAR},
       signature = #{signature,jdbcType=VARCHAR},
       uimage = #{uimage,jdbcType=VARCHAR},
-      registerTime = #{registertime,jdbcType=DATE},
+      registerTime = #{registertime,jdbcType=TIMESTAMP},
       urole = #{urole,jdbcType=INTEGER}
     where uName = #{uname,jdbcType=VARCHAR}
   </update>

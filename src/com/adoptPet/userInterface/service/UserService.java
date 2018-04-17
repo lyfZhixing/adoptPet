@@ -8,22 +8,22 @@ import com.adoptPet.userInterface.entity.User;
  * @param <T>
  *
  */
-public interface UserService<T> {
+public interface UserService {
 	
 	/**添加用户**/
 	int saveUser(User user)throws Exception;
 
 	/**验证用户名是否被注册**/
-	T findUserByName(String name)throws Exception;
+	User findUserByName(String name)throws Exception;
 	
 	/**验证用户手机号是否被注册**/
-	T findUserByPhone(String phone)throws Exception;
+	User findUserByPhone(String phone)throws Exception;
 
 	/**用来登录**/
-	int findUserByPhonePassword(String phone,String password)throws Exception;
+	User findUserByPhonePassword(String phone,String password)throws Exception;
 
 	/**检测用户名是否存在**/
-	T getByUserName(String userName)throws Exception;
+	User getByUserName(String userName)throws Exception;
 
 
 }

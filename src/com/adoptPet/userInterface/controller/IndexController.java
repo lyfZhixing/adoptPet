@@ -1,14 +1,15 @@
 package com.adoptPet.userInterface.controller;
 
-import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.adoptPet.userInterface.entity.User;
 import com.adoptPet.userInterface.service.UserService;
@@ -21,64 +22,72 @@ import com.alibaba.fastjson.JSON;
 @RequestMapping("/index")
 public class IndexController {
 
-	@Autowired
-	private UserService<User> userService;
 	
+	@Autowired private UserService userService;
+	@Autowired private HttpServletRequest request ;
+	
+	/**首页*/
 	@RequestMapping("/index")
 	public String toIndex(){
 		return "index";
 	}
 	
-	
+	/**注册*/
 	@RequestMapping("/register")
-	public void register(HttpServletRequest request, HttpServletResponse response){
-		response.setContentType("application/json;charset=utf-8");
-		String phoneno = (String)request.getParameter("phoneno");
-		String upwd = (String)request.getParameter("upwd");
-		String uname = (String)request.getParameter("uname");
-		User user = new User();
-		user.setPhoneno(phoneno);
-		user.setUname(uname);
-		user.setUpwd(upwd);
-		user.setUrole(1);
+	@ResponseBody
+	public String register(User user){
+		user.setUrole(1);//权限设值为1，普通用户
 		user.setRegistertime(new Date());
+		String json = "false";
 		try {
-			PrintWriter out = response.getWriter();
-			String json = null;
 			int flag = userService.saveUser(user);
 			if(flag >= 1){
 				json = JSON.toJSONString("success");
-			}else{
-				json = JSON.toJSONString("false");
 			}
-			out.println(json);
-			out.flush();
-			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		return json;
 	}
 	
-	@RequestMapping("/login")
-	public void login(HttpServletRequest request, HttpServletResponse response){
-		response.setContentType("application/json;charset=utf-8");
-		String phoneno = (String)request.getParameter("phoneno");
-		String upwd = (String)request.getParameter("upwd");
+	/**登录*/
+	@RequestMapping(value={"/login"},method={RequestMethod.POST})
+	@ResponseBody
+	public String login(String phoneno ,String upwd ){
+		String json = "false";
 		try {
-			PrintWriter out = response.getWriter();
-			String json = null;
-			int count = userService.findUserByPhonePassword(phoneno, upwd);
-			if(count > 0){
+			User user = userService.findUserByPhonePassword(phoneno, upwd);
+			if(user != null){
 				json = JSON.toJSONString("true");
-			}else{
-				json = JSON.toJSONString("false");
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);
+				session.setMaxInactiveInterval(60*20);
 			}
-			out.println(json);
-			out.flush();
-			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return json;
+	}
+	
+	/**登录验证码*/
+	@RequestMapping(value={"/loginVcode"},method={RequestMethod.POST})
+	@ResponseBody
+	public String loginVcode(String vcode){
+		String json = "false";
+		HttpSession session = request.getSession();
+		String vcode_session = (String) session.getAttribute("validateCode");
+		if(vcode.equals(vcode_session)){
+			json = JSON.toJSONString("true");
+		}
+		return json;
+	}
+	
+	/**退出登录*/
+	@RequestMapping(value={"/logOff"},method={RequestMethod.POST})
+	@ResponseBody
+	public String logOff(){
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "ojbk";
 	}
 }
