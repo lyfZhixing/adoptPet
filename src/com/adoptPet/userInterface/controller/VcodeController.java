@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -14,27 +15,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.adoptPet.util.VcodeBean;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
 
+import lombok.Cleanup;
+import lombok.NonNull;
+
 @Controller
+@RequestMapping("/vcode")
 public class VcodeController {
 
 	private static int WIDTH = 60;  
     private static int HEIGHT = 20;  
-  
+    @Autowired private HttpServletRequest request ;
     /**登录验证码*/
-    @RequestMapping("/vcode")
-    public void getVcode(HttpServletRequest request, HttpServletResponse response)  
+    @RequestMapping("/loginVcode")
+    public void loginVcode(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {  
         HttpSession session = request.getSession();  
         response.setContentType("image/jpeg");  
-        ServletOutputStream sos = response.getOutputStream();  
+        @Cleanup ServletOutputStream sos = response.getOutputStream();  
         // 设置浏览器不要缓存此图片   
         response.setHeader("Pragma", "No-cache");  
         response.setHeader("Cache-Control", "no-cache");  
@@ -53,14 +63,14 @@ public class VcodeController {
         // 结束图像 的绘制 过程， 完成图像   
         g.dispose();  
         // 将图像输出到客户端   
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+        @Cleanup ByteArrayOutputStream bos = new ByteArrayOutputStream();  
         ImageIO.write(image, "JPEG", bos);  
         byte[] buf = bos.toByteArray();  
         response.setContentLength(buf.length);  
         // 下面的语句也可写成： bos.writeTo(sos);   
         sos.write(buf);  
-        bos.close();  
-        sos.close();  
+//        bos.close();  
+//        sos.close();  
         // 将当前验证码存入到 Session 中   
         session.setAttribute("validateCode", new String(rands));  
         // 直接使用下面的代码将有问题， Session 对象必须在提交响应前获得   
@@ -106,18 +116,19 @@ public class VcodeController {
     }
     
     /**注册验证码*/
-    @RequestMapping("/sendsms")
-    public String sendsms(String phoneno){
+    @RequestMapping(value={"/registerVcode"},method={RequestMethod.POST})
+    @ResponseBody
+    public void registerVcode(String phoneno){
+    	
+    	HttpSession session = request.getSession();
     	// 短信应用SDK AppID
     	int appid = 1400085105; // 1400开头
     	// 短信应用SDK AppKey
     	String appkey = "e850804e45dfad1543577e48298f0bd7";
-    	// 需要发送短信的手机号码
-    	//String[] phoneNumbers = {"21212313123", "12345678902", "12345678903"};
     	// 短信模板ID，需要在短信应用中申请
-    	int templateId = 7839; // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+    	int templateId = 109350; 
     	// 签名
-    	String smsSign = "撩人的月色"; // NOTE: 这里的签名"腾讯云"只是一个示例，真实的签名需要在短信控制台中申请，另外签名参数使用的是`签名内容`，而不是`签名ID`
+    	String smsSign = "撩人的月色";
     	// 产生随机的认证码   
         char[] rands = generateCheckCode();
     	try {
@@ -136,8 +147,43 @@ public class VcodeController {
     	    // 网络IO错误
     	    e.printStackTrace();
     	}
-    	
-    	return new String(rands);
+    	VcodeBean vb = new VcodeBean(new String(rands),new Date().getTime()+1000*60*2);
+    	//将验证码存入session
+        session.setAttribute("RvcodeBean", vb);
     }
     
+    /**登录验证码*/
+	@RequestMapping(value={"/checkLoginVcode"},method={RequestMethod.POST})
+	@ResponseBody
+	public String checkLoginVcode(String vcode){
+		String json = "false";
+		HttpSession session = request.getSession();
+		String vcode_session = (String) session.getAttribute("validateCode");
+		if(vcode.equals(vcode_session)){
+			json = JSON.toJSONString("true");
+			session.removeAttribute("validateCode");
+		}
+		return json;
+	}
+	
+	@RequestMapping(value={"/checkRegisterVcode"},method={RequestMethod.POST})
+	@ResponseBody
+    /**校验注册验证码是否正确或过期*/
+    public String checkRegisterVcode(String vcode){
+    	String json = "false";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("RvcodeBean") != null){
+			@NonNull VcodeBean vb = (VcodeBean) session.getAttribute("RvcodeBean");
+			if(new Date().getTime() <= vb.getExpiredDate()){
+				if(vcode.equals(vb.getVcode())){
+					json = "true";
+					session.removeAttribute("RvcodeBean");
+				}
+			}else{
+				json = "timeout";
+			}
+		}
+		
+		return json;
+    }
 }

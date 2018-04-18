@@ -69,19 +69,6 @@ public class IndexController {
 		return json;
 	}
 	
-	/**登录验证码*/
-	@RequestMapping(value={"/loginVcode"},method={RequestMethod.POST})
-	@ResponseBody
-	public String loginVcode(String vcode){
-		String json = "false";
-		HttpSession session = request.getSession();
-		String vcode_session = (String) session.getAttribute("validateCode");
-		if(vcode.equals(vcode_session)){
-			json = JSON.toJSONString("true");
-		}
-		return json;
-	}
-	
 	/**退出登录*/
 	@RequestMapping(value={"/logOff"},method={RequestMethod.POST})
 	@ResponseBody

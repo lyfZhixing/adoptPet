@@ -32,7 +32,7 @@
                         </div>
                         <div class="model-verf">
                             <input id="inVcode" type="text" placeholder="请输入验证码">
-                            <div class="verification"><img id="vcode" src="${pageContext.request.contextPath}/vcode.action" alt="" title="点击刷新验证码"></div>
+                            <div class="verification"><img id="vcode" src="${pageContext.request.contextPath}/vcode/loginVcode.action" alt="" title="点击刷新验证码"></div>
                             <div id="vcodemsg" style="font-size:6"></div>
                         </div>
                         <div class="model-btn">
@@ -51,7 +51,7 @@
                         <div class="msg-phone">
                             <span>你的手机号：</span>
                             <input id="Rphoneno" type="text">
-                            <button>点击获取验证码</button>
+                            <button id="msmbt">点击获取验证码</button>
                         </div>
                         <div>
                             <span>验证码：</span>
