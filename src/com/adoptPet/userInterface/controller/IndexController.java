@@ -1,5 +1,6 @@
 package com.adoptPet.userInterface.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.adoptPet.userInterface.entity.User;
 import com.adoptPet.userInterface.service.UserService;
+import com.adoptPet.util.AddressUtil;
 import com.alibaba.fastjson.JSON;
 
 
@@ -31,6 +33,40 @@ public class IndexController {
 	public String toIndex(){
 		return "index";
 	}
+	
+	/**个人中心*/
+	@RequestMapping("/personal")
+	public String toPersonal(){
+		return "personal";
+	}
+	
+	/**资料设置*/
+	@RequestMapping("/settingDetial")
+	public String toSettingDetial(){
+		return "settingDetial";
+	}
+	
+	/**发布信息*/
+	@RequestMapping("/publish")
+	public String toPublish(){
+		return "publish";
+	}
+	
+	/**获取地址*/
+	@RequestMapping("/getAddress")
+	@ResponseBody
+	public String getAddress(HttpServletRequest request){
+		//获取ip
+		String ip = AddressUtil.getIpAddr(request);
+		String address = "郑州";
+		try {
+			address = AddressUtil.getAddressByIP(ip);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return address;
+	}
+	
 	
 	/**注册*/
 	@RequestMapping("/register")

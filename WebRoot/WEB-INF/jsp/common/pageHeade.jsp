@@ -2,13 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<input id="PageContext" type="hidden" value="${pageContext.request.contextPath}" />
+	<input id="sessionIsNull" type="hidden" value="${sessionScope.user}" />
         <div class="index-nav">
             <div class="logo"><img src="../img/logo.png" alt=""></div>
             <ul>
                 <a href="${pageContext.request.contextPath}/index/index.action"><li>首页</li></a>
                 <a href="#"><li>宠物圈</li></a>
                 <a href="#"><li>知识百科</li></a>
-                <a href="./personal.html"><li>个人中心</li></a>
+                <%-- <a href="${pageContext.request.contextPath}/index/personal.action"><li>个人中心</li></a> --%>
+                <a href="javascript:void(0);" id="a_personal"><li>个人中心</li></a>
             </ul>
             <div class="index-login" style="display: block">
             	<div class="bts">

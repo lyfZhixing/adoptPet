@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>首页</title>
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
@@ -32,7 +32,7 @@
         <div class="index-search content">
             <div class="index-search ">
                 <div class="search-detial" >
-                    <h3>北京</h3>
+                    <h3 id="ipAddress">北京</h3>
                     <div class="search-tog">切换</div>
                     <input type="text">
                     <img src="../img/u45.png" alt="">
@@ -287,5 +287,6 @@
     </div>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/pageHead.js"></script>
 </body>
 </html>

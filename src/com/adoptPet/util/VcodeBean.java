@@ -6,10 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@AllArgsConstructor
+//@AllArgsConstructor
 public class VcodeBean {
 
 	@Getter @Setter private String vcode;
 	@Getter @Setter private long expiredDate;
+	public VcodeBean(String vcode, long expiredDate) {
+		super();
+		this.vcode = vcode;
+		this.expiredDate = expiredDate;
+	}
 	
 }

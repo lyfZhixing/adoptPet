@@ -1,0 +1,22 @@
+.myname,.myaddress,.mytel,.mylogin{
+    margin: 30px 0px 40px 50px;
+}
+.detialaddress textarea{
+    width: 250px;
+}
+.bottom span{
+    font-weight: bold;
+    font-size: 18px;
+    color: #444444;
+}
+
+.bottom input{
+    height: 30px;
+    margin-top: 5px;
+    width: 250px;
+}
+
+.myaddress select{
+    width: 50px;
+}
+
