@@ -19,5 +19,8 @@
     <table schema="" tableName="user">
       <!-- <columnOverride column="???" property="???" /> -->
     </table>
+    <table schema="" tableName="district">
+      <!-- <columnOverride column="???" property="???" /> -->
+    </table>
   </context>
 </generatorConfiguration>

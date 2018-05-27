@@ -1,4 +1,4 @@
-.pubtitle,.pubdetial,.pubimg,.pubaddress,.pubquestions,.pubbuttons{
+.pubtype,.pubtitle,.pubdetial,.pubimg,.myaddress,.pubquestions,.pubbuttons{
     margin: 30px 0px 40px 50px;
 }
 
@@ -8,24 +8,41 @@
 }
 
 .pubdetial textarea{
-    width: 300px;
+    width: 500px;
     height: 100px;
 }
 
-.pubaddress select{
-    width: 60px;
+.myaddress select{
+	margin-right: 21px;
+    width: 84px;
 }
 
-.pubaddress textarea{
-    width: 300px;
+.myaddress textarea{
+    width: 500px;
     height: 50px;
 }
 
 .question textarea{
+	
     height: 50px;
-    width: 300px;
+    width: 500px;
 }
 
 .pubimg{
     width: 700px;
+}
+
+.pubbuttons{
+	width: 300px;
+	padding-top: 20px;
+	margin: 0 auto;
+}
+
+.selects{
+	margin-bottom: 20px;
+}
+
+#edit{
+	width: 40px;
+	height: 40px;
 }

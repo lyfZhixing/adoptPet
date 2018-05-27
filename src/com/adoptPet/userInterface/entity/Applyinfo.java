@@ -17,7 +17,7 @@ public class Applyinfo {
 
     private Date applytime;
 
-    private Integer appStatus;
+    private Integer appstatus;
 
     public String getSerialno() {
         return serialno;
@@ -75,11 +75,11 @@ public class Applyinfo {
         this.applytime = applytime;
     }
 
-    public Integer getAppStatus() {
-        return appStatus;
+    public Integer getAppstatus() {
+        return appstatus;
     }
 
-    public void setAppStatus(Integer appStatus) {
-        this.appStatus = appStatus;
+    public void setAppstatus(Integer appstatus) {
+        this.appstatus = appstatus;
     }
 }

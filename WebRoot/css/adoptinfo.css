@@ -1,0 +1,33 @@
+.bottom{
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.master-quiz{
+	
+}
+
+.master-quiz h3{
+	margin-top: 20px;
+}
+
+.master-quiz span{
+	margin:20px 0 0 0;
+	display: block;
+}
+.master-quiz textarea{
+	margin:20px 0 0 0;
+	display: block;
+	width: 900px;
+}
+
+.img-bts{
+	width: 210px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.img-bts img{
+	width: 50px;
+	height: 50px;
+	margin-right: 50px;
+}

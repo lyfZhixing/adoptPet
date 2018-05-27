@@ -1,0 +1,159 @@
+.bottom{
+    width: 940px;
+    /*height: 100%;
+    border:1px solid #333333;*/
+    padding: 40px 80px 0px 80px;
+}
+
+.mypub_top, .mypub_title , .mypub_describe , .mypub_address, .mypub_img, .mypub_apply{
+    margin-bottom: 20px;
+}
+
+.pubtime {
+    float: left;
+
+}
+.adoptstatus{
+    /* margin-right: 80px; */
+    float: right;
+}
+
+.mypub_img a img{
+    width: 220px;
+    height: 160px;
+    margin-right: 10px;
+}
+.mypub_apply span{
+    float: left;
+}
+.mypub_apply a{
+    margin-right: 80px;
+    float: right;
+}
+
+.mypub_applyinfos{
+	width: 100%;
+}
+
+.no_applyinfo{
+	width: 100%;
+}
+.mypub_applyinfo{
+	position:relative;
+    border:1px solid #333333;
+    width:250px;
+    height: 200px;
+    padding: 10px 10px 10px 10px;
+    margin-right:30px;
+    float: left;
+}
+
+.theanswer{
+
+    width: 700px;
+    height: 500px;
+    /* display:block; */
+    
+   /*  background:rgba(255,255,255,1); */
+    /*margin-left: 70px;*/
+    border:1px solid #cccccc;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    /* padding: 30px 0px 0px 50px; */
+    /* z-index: 666; */
+}
+
+.a_title{
+	
+	margin-left: 50px;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+
+
+.question{
+	margin-left: 50px;
+	width: 100%;
+	margin-bottom: 30px;
+	
+}
+
+.question textarea{
+	margin-left: 50px;
+	width: 600px;
+	height: 65px;
+	margin-top: 10px;
+	background:rgba(255,255,255,0);
+	
+}
+
+.myAnswer_bts{
+	width: 150px;
+	height: 35px;
+	margin: 0 auto;
+}
+
+.myAnswer_bts img{
+	margin-left: 20px;
+	margin-right: 20px;
+	width: 30px;
+	height: 30px;
+	
+}
+
+.applyer_name{
+	margin-top: 10px;
+	width: 100%;
+	height: 50px;
+}
+.applyer_name img{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 20px;
+}
+
+.applyer_name h4{
+    margin-top: 5px;
+    float: left;
+}
+
+.applyer_address span{
+    float: left;
+}
+
+.applyer_address div{
+    width: 180px;
+    height: 80px;
+    float:left;
+}
+
+.mypub_answerbt{
+	position:absolute; 
+	right:0px; bottom:0px; 
+	width: 100%;
+	height: 45px;
+}
+.mypub_answerbt img{
+    width: 40px;
+    height: 40px;
+    margin-left: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

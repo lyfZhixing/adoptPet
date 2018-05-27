@@ -12,6 +12,70 @@
 		</where>
 	</select>
 	
+	<!-- 登录 loginByUnamePassword -->
+	<sql id="login_UnamePassword">
+		uname='${uname}' and upwd='${upwd}'
+	</sql>
+	<select id="loginByUnamePassword" resultType="com.adoptPet.userInterface.entity.User" parameterType="com.adoptPet.userInterface.entity.User">
+		select uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole from user  
+		<where>
+			<include refid="login_UnamePassword"></include>
+		</where>
+	</select>
+	
+	<!-- 修改名字 updateUname -->
+	<update id="updateUname" parameterType="com.adoptPet.userInterface.entity.UserEx">
+			update user
+			<set>
+				uName = '${new_uname}'
+			</set>
+			<where>
+				uName = '${uname}'
+			</where>
+	</update>
+	
+	<!-- 修改地址 -->
+	<update id="updateAddress" parameterType="com.adoptPet.userInterface.entity.UserEx">
+			update user
+			<set>
+				uaddress = '${uaddress}'
+			</set>
+			<where>
+				uName = '${uname}'
+			</where>
+	</update>
+	
+	<!-- 修改电话updateEditTel -->
+	<update id="updateEditTel" parameterType="com.adoptPet.userInterface.entity.UserEx">
+			update user
+			<set>
+				phoneno = '${phoneno}'
+			</set>
+			<where>
+				uName = '${uname}'
+			</where>
+	</update>
+	
+	<!-- 修改密码 -->
+	<update id="updatePwd" parameterType="com.adoptPet.userInterface.entity.UserEx">
+			update user
+			<set>
+				upwd = '${upwd}'
+			</set>
+			<where>
+				uName = '${uname}'
+			</where>
+	</update>
+	
+	<!-- 查找地址 -->
+	
+	<select id="queryAddress" resultType="java.lang.String" parameterType="com.adoptPet.userInterface.entity.UserEx">
+		select  uAddress from user  
+		<where>
+			uname = '${uname}'
+		</where>
+	</select>
+	
 	<insert id="insert" parameterType="com.adoptPet.userInterface.entity.User">
     insert into user (uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole)
     values (#{uname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 

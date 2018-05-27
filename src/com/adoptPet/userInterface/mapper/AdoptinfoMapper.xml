@@ -13,9 +13,9 @@
     <result column="question1" jdbcType="VARCHAR" property="question1" />
     <result column="question2" jdbcType="VARCHAR" property="question2" />
     <result column="question3" jdbcType="VARCHAR" property="question3" />
-    <result column="Ado_status" jdbcType="INTEGER" property="adoStatus" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="publishTime" jdbcType="DATE" property="publishtime" />
+    <result column="adoStatus" jdbcType="INTEGER" property="adostatus" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="publishTime" jdbcType="TIMESTAMP" property="publishtime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.adoptPet.userInterface.entity.Adoptinfo">
     <result column="describes" jdbcType="LONGVARCHAR" property="describes" />
@@ -80,7 +80,7 @@
   </sql>
   <sql id="Base_Column_List">
     serialNo, uName, title, image1, image2, image3, image4, address, question1, question2, 
-    question3, Ado_status, type, publishTime
+    question3, adoStatus, type, publishTime
   </sql>
   <sql id="Blob_Column_List">
     describes
@@ -137,14 +137,14 @@
     insert into adoptinfo (serialNo, uName, title, 
       image1, image2, image3, 
       image4, address, question1, 
-      question2, question3, Ado_status, 
+      question2, question3, adoStatus, 
       type, publishTime, describes
       )
     values (#{serialno,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR}, 
       #{image4,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{question1,jdbcType=VARCHAR}, 
-      #{question2,jdbcType=VARCHAR}, #{question3,jdbcType=VARCHAR}, #{adoStatus,jdbcType=INTEGER}, 
-      #{type,jdbcType=INTEGER}, #{publishtime,jdbcType=DATE}, #{describes,jdbcType=LONGVARCHAR}
+      #{question2,jdbcType=VARCHAR}, #{question3,jdbcType=VARCHAR}, #{adostatus,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, #{describes,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
@@ -183,8 +183,8 @@
       <if test="question3 != null">
         question3,
       </if>
-      <if test="adoStatus != null">
-        Ado_status,
+      <if test="adostatus != null">
+        adoStatus,
       </if>
       <if test="type != null">
         type,
@@ -230,14 +230,14 @@
       <if test="question3 != null">
         #{question3,jdbcType=VARCHAR},
       </if>
-      <if test="adoStatus != null">
-        #{adoStatus,jdbcType=INTEGER},
+      <if test="adostatus != null">
+        #{adostatus,jdbcType=INTEGER},
       </if>
       <if test="type != null">
-        #{type,jdbcType=INTEGER},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null">
-        #{publishtime,jdbcType=DATE},
+        #{publishtime,jdbcType=TIMESTAMP},
       </if>
       <if test="describes != null">
         #{describes,jdbcType=LONGVARCHAR},
@@ -286,14 +286,14 @@
       <if test="record.question3 != null">
         question3 = #{record.question3,jdbcType=VARCHAR},
       </if>
-      <if test="record.adoStatus != null">
-        Ado_status = #{record.adoStatus,jdbcType=INTEGER},
+      <if test="record.adostatus != null">
+        adoStatus = #{record.adostatus,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.publishtime != null">
-        publishTime = #{record.publishtime,jdbcType=DATE},
+        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.describes != null">
         describes = #{record.describes,jdbcType=LONGVARCHAR},
@@ -316,9 +316,9 @@
       question1 = #{record.question1,jdbcType=VARCHAR},
       question2 = #{record.question2,jdbcType=VARCHAR},
       question3 = #{record.question3,jdbcType=VARCHAR},
-      Ado_status = #{record.adoStatus,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER},
-      publishTime = #{record.publishtime,jdbcType=DATE},
+      adoStatus = #{record.adostatus,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
       describes = #{record.describes,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -337,9 +337,9 @@
       question1 = #{record.question1,jdbcType=VARCHAR},
       question2 = #{record.question2,jdbcType=VARCHAR},
       question3 = #{record.question3,jdbcType=VARCHAR},
-      Ado_status = #{record.adoStatus,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER},
-      publishTime = #{record.publishtime,jdbcType=DATE}
+      adoStatus = #{record.adostatus,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -377,14 +377,14 @@
       <if test="question3 != null">
         question3 = #{question3,jdbcType=VARCHAR},
       </if>
-      <if test="adoStatus != null">
-        Ado_status = #{adoStatus,jdbcType=INTEGER},
+      <if test="adostatus != null">
+        adoStatus = #{adostatus,jdbcType=INTEGER},
       </if>
       <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null">
-        publishTime = #{publishtime,jdbcType=DATE},
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
       </if>
       <if test="describes != null">
         describes = #{describes,jdbcType=LONGVARCHAR},
@@ -404,9 +404,9 @@
       question1 = #{question1,jdbcType=VARCHAR},
       question2 = #{question2,jdbcType=VARCHAR},
       question3 = #{question3,jdbcType=VARCHAR},
-      Ado_status = #{adoStatus,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      publishTime = #{publishtime,jdbcType=DATE},
+      adoStatus = #{adostatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
       describes = #{describes,jdbcType=LONGVARCHAR}
     where serialNo = #{serialno,jdbcType=VARCHAR}
   </update>
@@ -422,9 +422,9 @@
       question1 = #{question1,jdbcType=VARCHAR},
       question2 = #{question2,jdbcType=VARCHAR},
       question3 = #{question3,jdbcType=VARCHAR},
-      Ado_status = #{adoStatus,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      publishTime = #{publishtime,jdbcType=DATE}
+      adoStatus = #{adostatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP}
     where serialNo = #{serialno,jdbcType=VARCHAR}
   </update>
 </mapper>

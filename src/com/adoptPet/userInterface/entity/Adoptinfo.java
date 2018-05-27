@@ -25,9 +25,9 @@ public class Adoptinfo {
 
     private String question3;
 
-    private Integer adoStatus;
+    private Integer adostatus;
 
-    private Integer type;
+    private String type;
 
     private Date publishtime;
 
@@ -121,19 +121,19 @@ public class Adoptinfo {
         this.question3 = question3;
     }
 
-    public Integer getAdoStatus() {
-        return adoStatus;
+    public Integer getAdostatus() {
+        return adostatus;
     }
 
-    public void setAdoStatus(Integer adoStatus) {
-        this.adoStatus = adoStatus;
+    public void setAdostatus(Integer adostatus) {
+        this.adostatus = adostatus;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 

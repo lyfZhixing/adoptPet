@@ -17,13 +17,13 @@ $(".login").click(function () {
 var vcodeflag = "false";
 //登录ajax
 $(".btn-1").click(function(){
-	var phoneno = $("#phoneno").val();
+	var uname = $("#phoneno").val();
 	var upwd = $("#upwd").val();
 	if(vcodeflag == "ojbk"){
 		$.ajax({
 			  type: "POST",
 			   url: $("#PageContext").val()+"/index/login.action",
-			   data: {"phoneno":phoneno,"upwd":upwd},
+			   data: {"uname":uname,"upwd":upwd},
 			   dataType: "json",
 			   success: function(msg){
 			     if(msg == "\"true\""){
@@ -48,7 +48,7 @@ $(".logoff").click(function(){
 		  type: "POST",
 		  url: $("#PageContext").val()+"/index/logOff.action",
 		  success: function(msg){
-			  location.reload();
+			  window.location.href=$("#PageContext").val()+"/index/index.action"
 		  }
 		});
 });

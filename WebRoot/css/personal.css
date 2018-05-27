@@ -113,7 +113,7 @@ body{
 
 }
 
-.head_left a{
+.head_left a ,#adopt_more{
     float: right;
     color: rgba(6, 21, 255, 0.61);
     margin-right: 20px;
@@ -161,18 +161,19 @@ body{
     border-left:1px solid #333333;
 }
 
-.adopt-info{
+.adopt-info , .apply-info{
     margin: 20px 50px 40px 50px;
     width: 150px;
     height: auto;
+    float: left;
 }
 
-.adopt-info img{
+.adopt-info img , .apply-info img{
     width: 150px;
     height: 150px;
 }
 
-.adopt-info p{
+.adopt-info p, .apply-info p{
     width: 150px;
     height: auto;
 }

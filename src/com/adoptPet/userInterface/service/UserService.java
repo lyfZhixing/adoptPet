@@ -21,9 +21,24 @@ public interface UserService {
 
 	/**用来登录**/
 	User findUserByPhonePassword(String phone,String password)throws Exception;
+	User findUserByUnamePassword(String uname,String password)throws Exception;
 
 	/**检测用户名是否存在**/
 	User getByUserName(String userName)throws Exception;
 
+	/**修改用户名*/
+	int updateUname(String uname ,String old_uname)throws Exception;
+	
+	/**修改用户地址*/
+	int updateAddress(String uname, String address)throws Exception;
+
+	/**修改电话*/
+	int updateEditTel(String uname, String tel)throws Exception;
+
+	/**修改密码*/
+	int updatePwd(String uname, String pwd)throws Exception;
+
+	/**查找地址*/
+	String queryAddress(String uname)throws Exception;
 
 }

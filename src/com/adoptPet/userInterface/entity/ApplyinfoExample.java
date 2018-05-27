@@ -2,7 +2,6 @@ package com.adoptPet.userInterface.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class ApplyinfoExample {
@@ -104,32 +103,6 @@ public class ApplyinfoExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andSerialnoIsNull() {
@@ -563,112 +536,112 @@ public class ApplyinfoExample {
         }
 
         public Criteria andApplytimeEqualTo(Date value) {
-            addCriterionForJDBCDate("applyTime =", value, "applytime");
+            addCriterion("applyTime =", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("applyTime <>", value, "applytime");
+            addCriterion("applyTime <>", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("applyTime >", value, "applytime");
+            addCriterion("applyTime >", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("applyTime >=", value, "applytime");
+            addCriterion("applyTime >=", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeLessThan(Date value) {
-            addCriterionForJDBCDate("applyTime <", value, "applytime");
+            addCriterion("applyTime <", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("applyTime <=", value, "applytime");
+            addCriterion("applyTime <=", value, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeIn(List<Date> values) {
-            addCriterionForJDBCDate("applyTime in", values, "applytime");
+            addCriterion("applyTime in", values, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("applyTime not in", values, "applytime");
+            addCriterion("applyTime not in", values, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("applyTime between", value1, value2, "applytime");
+            addCriterion("applyTime between", value1, value2, "applytime");
             return (Criteria) this;
         }
 
         public Criteria andApplytimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("applyTime not between", value1, value2, "applytime");
+            addCriterion("applyTime not between", value1, value2, "applytime");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusIsNull() {
-            addCriterion("App_status is null");
+        public Criteria andAppstatusIsNull() {
+            addCriterion("appStatus is null");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusIsNotNull() {
-            addCriterion("App_status is not null");
+        public Criteria andAppstatusIsNotNull() {
+            addCriterion("appStatus is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusEqualTo(Integer value) {
-            addCriterion("App_status =", value, "appStatus");
+        public Criteria andAppstatusEqualTo(Integer value) {
+            addCriterion("appStatus =", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusNotEqualTo(Integer value) {
-            addCriterion("App_status <>", value, "appStatus");
+        public Criteria andAppstatusNotEqualTo(Integer value) {
+            addCriterion("appStatus <>", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusGreaterThan(Integer value) {
-            addCriterion("App_status >", value, "appStatus");
+        public Criteria andAppstatusGreaterThan(Integer value) {
+            addCriterion("appStatus >", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("App_status >=", value, "appStatus");
+        public Criteria andAppstatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("appStatus >=", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusLessThan(Integer value) {
-            addCriterion("App_status <", value, "appStatus");
+        public Criteria andAppstatusLessThan(Integer value) {
+            addCriterion("appStatus <", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("App_status <=", value, "appStatus");
+        public Criteria andAppstatusLessThanOrEqualTo(Integer value) {
+            addCriterion("appStatus <=", value, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusIn(List<Integer> values) {
-            addCriterion("App_status in", values, "appStatus");
+        public Criteria andAppstatusIn(List<Integer> values) {
+            addCriterion("appStatus in", values, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusNotIn(List<Integer> values) {
-            addCriterion("App_status not in", values, "appStatus");
+        public Criteria andAppstatusNotIn(List<Integer> values) {
+            addCriterion("appStatus not in", values, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusBetween(Integer value1, Integer value2) {
-            addCriterion("App_status between", value1, value2, "appStatus");
+        public Criteria andAppstatusBetween(Integer value1, Integer value2) {
+            addCriterion("appStatus between", value1, value2, "appstatus");
             return (Criteria) this;
         }
 
-        public Criteria andAppStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("App_status not between", value1, value2, "appStatus");
+        public Criteria andAppstatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("appStatus not between", value1, value2, "appstatus");
             return (Criteria) this;
         }
     }

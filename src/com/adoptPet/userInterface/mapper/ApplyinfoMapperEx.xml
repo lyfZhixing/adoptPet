@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adoptPet.userInterface.mapper.ApplyinfoMapperEx">
+
+	<insert id="insert" parameterType="com.adoptPet.userInterface.entity.Applyinfo">
+    insert into applyinfo (serialNo, serialNo2, uName, 
+      answer1, answer2, answer3, 
+      applyTime, appStatus)
+    values (#{serialno,jdbcType=VARCHAR}, #{serialno2,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, 
+      #{answer1,jdbcType=VARCHAR}, #{answer2,jdbcType=VARCHAR}, #{answer3,jdbcType=VARCHAR}, 
+      #{applytime,jdbcType=TIMESTAMP}, #{appstatus,jdbcType=INTEGER})
+  </insert>
+  
+  <select id="queryApplyByserialno2Uname" parameterType="com.adoptPet.userInterface.entity.ApplyInfoEx" resultType="com.adoptPet.userInterface.entity.ApplyInfoEx">
+		select uname from applyinfo 
+		<where>
+			uname = #{uname} and serialno2 = #{serialno2}
+		</where>
+	</select>
+</mapper>

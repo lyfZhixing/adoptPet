@@ -19,6 +19,8 @@ public class User {
 
     private Integer urole;
 
+    private Integer status;
+
     public String getUname() {
         return uname;
     }
@@ -81,5 +83,13 @@ public class User {
 
     public void setUrole(Integer urole) {
         this.urole = urole;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

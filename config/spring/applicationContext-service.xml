@@ -14,4 +14,8 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 <!-- 用户表为中心的service -->
 <bean id="UserService" class="com.adoptPet.userInterface.service.impl.UserServiceImpl"/>
+<!-- 地址Service -->
+<bean id="DistrictService" class="com.adoptPet.userInterface.service.impl.DistrictServiceImpl"/>
+<!-- 领养信息Service -->
+<bean id="AdoptService" class="com.adoptPet.userInterface.service.impl.AdoptServiceImpl"/>
 </beans>

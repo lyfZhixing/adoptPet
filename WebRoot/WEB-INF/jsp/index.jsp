@@ -64,224 +64,72 @@
             <div class="latest-title">
                 <h2>最新发布：</h2>
                 <p>更多>></p>
+                <div style="clear: both"></div>
             </div>
             <div class="latest-detial">
-                <div class="latest-det">
+            
+            <c:forEach var="newPublish" items="${newPublishs}" begin="0" end="7" step="1">
+            	<div class="latest-det">
                     <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
+                    <input type="hidden" value="${newPublish.serialno}"/>
+                    <h4>${newPublish.title}</h4>
+                    <p>已申请人数：${newPublish.count }人</p>
+                    <p>发布人：${newPublish.uname }</p>
                 </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
+            </c:forEach>
+                
             </div>
         </div>
         <div class="index-dog content">
             <div class="latest-title">
                 <h2><img src="../img/u83.png" alt="">狗狗：</h2>
                 <p>更多>></p>
+                <div style="clear: both"></div>
             </div>
             <div class="dog-detial">
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
+                <c:forEach var="dog" items="${dogs}" begin="0" end="7" step="1">
+	            	<div class="latest-det">
+	                    <img src="../img/u45.png" alt="">
+	                    <h4>${dog.title}</h4>
+	                    <p>已申请人数：${dog.count }人</p>
+	                    <p>发布人：${dog.uname }</p>
+	                </div>
+            	</c:forEach>
+                
             </div>
         </div>
         <div class="index-cat content">
             <div class="latest-title">
                 <h2><img src="../img/u67.png" alt="">猫咪：</h2>
                 <p>更多>></p>
+                <div style="clear: both"></div>
             </div>
             <div class="cat-detial">
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
+                <c:forEach var="cat" items="${cats}" begin="0" end="7" step="1">
+	            	<div class="latest-det">
+	                    <img src="../img/u45.png" alt="">
+	                    <h4>${cat.title}</h4>
+	                    <p>已申请人数：${cat.count }人</p>
+	                    <p>发布人：${cat.uname }</p>
+	                </div>
+            	</c:forEach>
             </div>
         </div>
         <div class="index-other content">
             <div class="latest-title">
                 <h2><img src="../img/u75.png" alt="">其他：</h2>
                 <p>更多>></p>
+                <div style="clear: both"></div>
             </div>
             <div class="other-detial">
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
-                <div class="latest-det">
-                    <img src="../img/u45.png" alt="">
-                    <h4>金毛 2年 免费领养 狗贩勿扰</h4>
-                    <p>已申请人数：5人</p>
-                    <p>发布人：王先生</p>
-                </div>
+                <c:forEach var="other" items="${others}" begin="0" end="7" step="1">
+	            	<div class="latest-det">
+	                    <img src="../img/u45.png" alt="">
+	                    <h4>${other.title}</h4>
+	                    <p>已申请人数：${other.count }人</p>
+	                    <p>发布人：${other.uname }</p>
+	                </div>
+            	</c:forEach>
             </div>
         </div>
     </div>

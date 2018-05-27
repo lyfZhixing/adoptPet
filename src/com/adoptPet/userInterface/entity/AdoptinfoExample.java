@@ -2,7 +2,6 @@ package com.adoptPet.userInterface.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class AdoptinfoExample {
@@ -104,32 +103,6 @@ public class AdoptinfoExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andSerialnoIsNull() {
@@ -902,63 +875,63 @@ public class AdoptinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusIsNull() {
-            addCriterion("Ado_status is null");
+        public Criteria andAdostatusIsNull() {
+            addCriterion("adoStatus is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusIsNotNull() {
-            addCriterion("Ado_status is not null");
+        public Criteria andAdostatusIsNotNull() {
+            addCriterion("adoStatus is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusEqualTo(Integer value) {
-            addCriterion("Ado_status =", value, "adoStatus");
+        public Criteria andAdostatusEqualTo(Integer value) {
+            addCriterion("adoStatus =", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusNotEqualTo(Integer value) {
-            addCriterion("Ado_status <>", value, "adoStatus");
+        public Criteria andAdostatusNotEqualTo(Integer value) {
+            addCriterion("adoStatus <>", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusGreaterThan(Integer value) {
-            addCriterion("Ado_status >", value, "adoStatus");
+        public Criteria andAdostatusGreaterThan(Integer value) {
+            addCriterion("adoStatus >", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Ado_status >=", value, "adoStatus");
+        public Criteria andAdostatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("adoStatus >=", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusLessThan(Integer value) {
-            addCriterion("Ado_status <", value, "adoStatus");
+        public Criteria andAdostatusLessThan(Integer value) {
+            addCriterion("adoStatus <", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("Ado_status <=", value, "adoStatus");
+        public Criteria andAdostatusLessThanOrEqualTo(Integer value) {
+            addCriterion("adoStatus <=", value, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusIn(List<Integer> values) {
-            addCriterion("Ado_status in", values, "adoStatus");
+        public Criteria andAdostatusIn(List<Integer> values) {
+            addCriterion("adoStatus in", values, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusNotIn(List<Integer> values) {
-            addCriterion("Ado_status not in", values, "adoStatus");
+        public Criteria andAdostatusNotIn(List<Integer> values) {
+            addCriterion("adoStatus not in", values, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusBetween(Integer value1, Integer value2) {
-            addCriterion("Ado_status between", value1, value2, "adoStatus");
+        public Criteria andAdostatusBetween(Integer value1, Integer value2) {
+            addCriterion("adoStatus between", value1, value2, "adostatus");
             return (Criteria) this;
         }
 
-        public Criteria andAdoStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("Ado_status not between", value1, value2, "adoStatus");
+        public Criteria andAdostatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("adoStatus not between", value1, value2, "adostatus");
             return (Criteria) this;
         }
 
@@ -972,52 +945,62 @@ public class AdoptinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Integer value) {
+        public Criteria andTypeEqualTo(String value) {
             addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Integer value) {
+        public Criteria andTypeNotEqualTo(String value) {
             addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Integer value) {
+        public Criteria andTypeGreaterThan(String value) {
             addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
             addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Integer value) {
+        public Criteria andTypeLessThan(String value) {
             addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andTypeLessThanOrEqualTo(String value) {
             addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Integer> values) {
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
             addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Integer> values) {
+        public Criteria andTypeNotIn(List<String> values) {
             addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Integer value1, Integer value2) {
+        public Criteria andTypeBetween(String value1, String value2) {
             addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andTypeNotBetween(String value1, String value2) {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
@@ -1033,52 +1016,52 @@ public class AdoptinfoExample {
         }
 
         public Criteria andPublishtimeEqualTo(Date value) {
-            addCriterionForJDBCDate("publishTime =", value, "publishtime");
+            addCriterion("publishTime =", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("publishTime <>", value, "publishtime");
+            addCriterion("publishTime <>", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("publishTime >", value, "publishtime");
+            addCriterion("publishTime >", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("publishTime >=", value, "publishtime");
+            addCriterion("publishTime >=", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeLessThan(Date value) {
-            addCriterionForJDBCDate("publishTime <", value, "publishtime");
+            addCriterion("publishTime <", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("publishTime <=", value, "publishtime");
+            addCriterion("publishTime <=", value, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeIn(List<Date> values) {
-            addCriterionForJDBCDate("publishTime in", values, "publishtime");
+            addCriterion("publishTime in", values, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("publishTime not in", values, "publishtime");
+            addCriterion("publishTime not in", values, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("publishTime between", value1, value2, "publishtime");
+            addCriterion("publishTime between", value1, value2, "publishtime");
             return (Criteria) this;
         }
 
         public Criteria andPublishtimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("publishTime not between", value1, value2, "publishtime");
+            addCriterion("publishTime not between", value1, value2, "publishtime");
             return (Criteria) this;
         }
     }

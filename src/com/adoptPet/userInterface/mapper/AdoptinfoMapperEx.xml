@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adoptPet.userInterface.mapper.AdoptinfoMapperEx">
+
+	<insert id="insert" parameterType="com.adoptPet.userInterface.entity.Adoptinfo">
+    insert into adoptinfo (serialNo, uName, title, 
+      image1, image2, image3, 
+      image4, address, question1, 
+      question2, question3, adoStatus, 
+      type, publishTime, describes
+      )
+    values (#{serialno,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR}, 
+      #{image4,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{question1,jdbcType=VARCHAR}, 
+      #{question2,jdbcType=VARCHAR}, #{question3,jdbcType=VARCHAR}, #{adostatus,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, #{describes,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+	<select id="queryByUname" parameterType="java.lang.String" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		select * from adoptinfo 
+		<where>
+			uname = #{uname}
+		</where>
+		order by serialNo desc
+	</select>
+	
+	<select id="queryCount" parameterType="java.lang.String" resultType="com.adoptPet.userInterface.entity.ApplyInfoEx">
+		select 
+		<include refid="applybaselist" />
+		 from applyinfo 
+		<where>
+			serialno2 = #{serialno}
+		</where>
+	</select>
+	
+	
+	<resultMap type="com.adoptPet.userInterface.entity.ApplyInfoEx" id="resultApplyList">
+		<id column="serialNo" jdbcType="VARCHAR" property="serialno" />
+	    <result column="serialNo2" jdbcType="VARCHAR" property="serialno2" />
+	    <result column="uName" jdbcType="VARCHAR" property="uname" />
+	    <result column="answer1" jdbcType="VARCHAR" property="answer1" />
+	    <result column="answer2" jdbcType="VARCHAR" property="answer2" />
+	    <result column="answer3" jdbcType="VARCHAR" property="answer3" />
+	    <result column="applyTime" jdbcType="TIMESTAMP" property="applytime" />
+	    <result column="appStatus" jdbcType="INTEGER" property="appstatus" />
+	    
+		<association property="user" javaType="com.adoptPet.userInterface.entity.User">
+		 	<id column="uName" jdbcType="VARCHAR" property="uname" />
+		    <result column="phoneNo" jdbcType="VARCHAR" property="phoneno" />
+		    <result column="upwd" jdbcType="VARCHAR" property="upwd" />
+		    <result column="uAddress" jdbcType="VARCHAR" property="uaddress" />
+		    <result column="signature" jdbcType="VARCHAR" property="signature" />
+		    <result column="uimage" jdbcType="VARCHAR" property="uimage" />
+		    <result column="registerTime" jdbcType="TIMESTAMP" property="registertime" />
+		    <result column="urole" jdbcType="INTEGER" property="urole" />
+		    
+		    <result column="status" jdbcType="INTEGER" property="status" />
+		    
+		</association>
+		
+	</resultMap>
+	<sql id="applybaselist">
+		 serialNo, serialNo2, applyinfo.uName, answer1, answer2, answer3, applyTime, appStatus
+	</sql>
+	<sql id="userbaselist">
+    	`user`.uName ,phoneNo, upwd, uAddress, signature, uimage, registerTime, urole, status
+  	</sql>
+	
+	<select id="querypubApplys" parameterType="java.lang.String" resultMap="resultApplyList">
+		select 
+		<include refid="applybaselist" />,
+		<include refid="userbaselist" />
+		 from applyinfo,`user`
+		<where>
+			applyinfo.serialNo2=#{serialno } and `user`.uName = applyinfo.uName
+		</where>
+		order by applyinfo.serialNo2 desc limit 0,3
+	</select>
+	
+	
+	
+	<select id="queryNewPublish" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		select publishTime,serialNo,uName,title from adoptinfo
+		<where>
+			adoStatus=1
+		</where>
+		order by publishTime desc limit 0,8
+	</select>
+	
+	<select id="queryTypePublish" parameterType="java.lang.String" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		select publishTime, serialNo,uName,title from adoptinfo
+		<where>
+			adoStatus=1 and type=#{type}
+		</where>
+		order by publishTime desc limit 0,8
+	</select>
+	
+	<select id="queryAdoptBySerialno" parameterType="java.lang.String" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		select * from adoptinfo 
+		<where>
+			serialno = #{serialno}
+		</where>
+	</select>
+</mapper>

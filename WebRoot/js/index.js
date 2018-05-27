@@ -15,11 +15,23 @@ $(function() {
 		  type: "POST",
 		  url: $("#PageContext").val()+"/index/getAddress.action",
 		  success: function(msg){
-			 alert(msg);
+			 //alert(msg);
 		  }
 		});
     
 });
+
+/**弹出地址选择框*/
+$(".search-tog").click(function () {
+    $(".search-choice").toggle();
+});
+/**查看详情*/
+$(".latest-det img").click(function () {
+	var serialno = $(this).next("input").val();
+	window.location.href=$("#PageContext").val()+"/adopt/info.action?serialno="+serialno;
+});
+
+
 
 var t;
 var index = 0;

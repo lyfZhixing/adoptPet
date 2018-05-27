@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adoptPet.userInterface.mapper.DistrictMapperEx">
+	<!-- 
+	<sql id="query_ssx">
+	</sql> 
+	-->
+	<resultMap type="com.adoptPet.userInterface.entity.District" id="districtList">
+		<result column="id" jdbcType="SMALLINT" property="id"/>
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+		<result column="parentId" jdbcType="SMALLINT" property="parentId"/>
+		<result column="initial" jdbcType="CHAR" property="initial"/>
+		<result column="initials" jdbcType="VARCHAR" property="initials"/>
+		<result column="pinyin" jdbcType="VARCHAR" property="pinyin"/>
+		<result column="extra" jdbcType="VARCHAR" property="extra"/>
+		<result column="suffix" jdbcType="VARCHAR" property="suffix"/>
+		<result column="code" jdbcType="CHAR" property="code"/>
+		<result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+		<result column="order" jdbcType="TINYINT" property="order"/>
+	</resultMap>
+	
+	<select id="querySSX" resultMap="districtList" >
+		select id, name, suffix, code, area_code, `order` from district  
+	</select>
+	
+	<!-- 查询省 -->
+	<select id="queryPro" resultMap="districtList" >
+		select id, name, suffix, code, area_code, `order` from district
+		<where>
+			id &lt;= 34
+		</where> 
+	</select>
+	
+	<!-- 查询市 -->
+	<select id="queryCity" resultMap="districtList" parameterType="java.lang.String">
+		select id, name, suffix, code, area_code, `order` from district 
+		<where>
+			code like '${_parameter}' and suffix &lt;&gt;'省'
+		</where> 
+	</select>
+	
+	<!-- 查询县 -->
+	<select id="queryCounty" resultMap="districtList" parameterType="java.lang.String">
+		select id, name, suffix, code, area_code, `order` from district 
+		<where>
+		<!-- 直辖市判断 -->
+		<choose>
+			<when test="_parameter == '1100%' || _parameter == '1200%' || _parameter == '3100%' || _parameter == '5000%'">
+				code like CONCAT(left('${_parameter}',2),'%') and code &lt;&gt; CONCAT(left('${_parameter}',2),'0000')
+			</when>
+			<when test="_parameter == ''">
+				1=2
+			</when>
+			<otherwise>
+				code like '${_parameter}' and code not like '%00'
+			</otherwise>
+		</choose>
+		
+			
+		</where> 
+	</select>
+	
+</mapper>

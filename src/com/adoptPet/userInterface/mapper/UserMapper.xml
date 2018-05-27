@@ -10,6 +10,7 @@
     <result column="uimage" jdbcType="VARCHAR" property="uimage" />
     <result column="registerTime" jdbcType="TIMESTAMP" property="registertime" />
     <result column="urole" jdbcType="INTEGER" property="urole" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole
+    uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole, status
   </sql>
   <select id="selectByExample" parameterType="com.adoptPet.userInterface.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -103,10 +104,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.adoptPet.userInterface.entity.User">
-    insert into user (uName, phoneNo, upwd, uAddress, signature, uimage, registerTime, urole)
+    insert into user (uName, phoneNo, upwd, 
+      uAddress, signature, uimage, 
+      registerTime, urole, status
+      )
     values (#{uname,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
       #{uaddress,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{uimage,jdbcType=VARCHAR}, 
-      #{registertime,jdbcType=TIMESTAMP}, #{urole,jdbcType=INTEGER})
+      #{registertime,jdbcType=TIMESTAMP}, #{urole,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.adoptPet.userInterface.entity.User">
     insert into user
@@ -135,6 +140,9 @@
       <if test="urole != null">
         urole,
       </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uname != null">
@@ -160,6 +168,9 @@
       </if>
       <if test="urole != null">
         #{urole,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -196,6 +207,9 @@
       <if test="record.urole != null">
         urole = #{record.urole,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +224,8 @@
       signature = #{record.signature,jdbcType=VARCHAR},
       uimage = #{record.uimage,jdbcType=VARCHAR},
       registerTime = #{record.registertime,jdbcType=TIMESTAMP},
-      urole = #{record.urole,jdbcType=INTEGER}
+      urole = #{record.urole,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -239,6 +254,9 @@
       <if test="urole != null">
         urole = #{urole,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where uName = #{uname,jdbcType=VARCHAR}
   </update>
@@ -250,7 +268,8 @@
       signature = #{signature,jdbcType=VARCHAR},
       uimage = #{uimage,jdbcType=VARCHAR},
       registerTime = #{registertime,jdbcType=TIMESTAMP},
-      urole = #{urole,jdbcType=INTEGER}
+      urole = #{urole,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
     where uName = #{uname,jdbcType=VARCHAR}
   </update>
 </mapper>

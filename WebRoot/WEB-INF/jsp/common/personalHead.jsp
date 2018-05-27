@@ -4,6 +4,7 @@
 	 <div class="seting-photo"><img src="../img/u67.png" alt=""></div>
                 <div class="seting-remarks">
                     <h3>${sessionScope.user.uname  }</h3>
+                    <input id="hiddenUname" type="hidden" value="${sessionScope.user.uname  }">
                     <input type="text" value="这个人很懒，什么也没说......">
                 </div>
                 <div class="seting-detial">资料设置</div>

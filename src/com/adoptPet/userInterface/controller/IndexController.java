@@ -2,6 +2,7 @@ package com.adoptPet.userInterface.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.adoptPet.userInterface.entity.Adoptinfo;
+import com.adoptPet.userInterface.entity.AdoptinfoEx;
+import com.adoptPet.userInterface.entity.ApplyInfoEx;
 import com.adoptPet.userInterface.entity.User;
+import com.adoptPet.userInterface.service.AdoptService;
 import com.adoptPet.userInterface.service.UserService;
 import com.adoptPet.util.AddressUtil;
 import com.alibaba.fastjson.JSON;
@@ -24,32 +29,65 @@ import com.alibaba.fastjson.JSON;
 @RequestMapping("/index")
 public class IndexController {
 
-	
+	@Autowired private AdoptService adoptService;
 	@Autowired private UserService userService;
 	@Autowired private HttpServletRequest request ;
 	
 	/**首页*/
 	@RequestMapping("/index")
 	public String toIndex(){
+		
+		try {
+			//最新发布
+			List<AdoptinfoEx> newPublishs = adoptService.queryNewPublish();
+			List<AdoptinfoEx> dogs = adoptService.queryTypePublish("狗狗");
+			List<AdoptinfoEx> cats = adoptService.queryTypePublish("猫咪");
+			List<AdoptinfoEx> others = adoptService.queryTypePublish("其他");
+			request.setAttribute("newPublishs", newPublishs);
+			request.setAttribute("dogs", dogs);
+			request.setAttribute("cats", cats);
+			request.setAttribute("others", others);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "index";
 	}
 	
 	/**个人中心*/
 	@RequestMapping("/personal")
 	public String toPersonal(){
-		return "personal";
+		
+		String view = "index";
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if(user == null){
+			view = "redirect:index.action";
+		}else{
+			String uname = user.getUname();
+			try {
+				List<AdoptinfoEx> myPublishs = adoptService.queryMyPublish(uname);
+				List<ApplyInfoEx> pubApplys = adoptService.querypubApplys(myPublishs);
+				request.setAttribute("myPublishs", myPublishs);
+				request.setAttribute("pubApplys", pubApplys);
+				view = "personal/personal";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return view;
 	}
 	
 	/**资料设置*/
 	@RequestMapping("/settingDetial")
 	public String toSettingDetial(){
-		return "settingDetial";
+		return "personal/settingDetial";
 	}
 	
 	/**发布信息*/
 	@RequestMapping("/publish")
 	public String toPublish(){
-		return "publish";
+		return "personal/publish";
 	}
 	
 	/**获取地址*/
@@ -89,10 +127,10 @@ public class IndexController {
 	/**登录*/
 	@RequestMapping(value={"/login"},method={RequestMethod.POST})
 	@ResponseBody
-	public String login(String phoneno ,String upwd ){
+	public String login(String uname ,String upwd ){
 		String json = "false";
 		try {
-			User user = userService.findUserByPhonePassword(phoneno, upwd);
+			User user = userService.findUserByUnamePassword(uname, upwd);
 			if(user != null){
 				json = JSON.toJSONString("true");
 				HttpSession session = request.getSession();
