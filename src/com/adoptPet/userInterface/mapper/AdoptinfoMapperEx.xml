@@ -102,4 +102,16 @@
 			serialno = #{serialno}
 		</where>
 	</select>
+	
+	<update id="updateStatus" parameterType="com.adoptPet.userInterface.entity.ApplyInfoEx">
+		update adoptinfo
+		<set>
+			<if test="serialno2 != null">
+				adostatus = 3
+				<where>
+					serialno = #{serialno2}
+				</where>
+			</if>
+		</set>
+	</update>
 </mapper>

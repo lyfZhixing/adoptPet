@@ -17,4 +17,91 @@
 			uname = #{uname} and serialno2 = #{serialno2}
 		</where>
 	</select>
+	
+	
+	
+	<resultMap type="com.adoptPet.userInterface.entity.QueryMyApply" id="resultMyApplyList">
+		
+		<id column="appserialNo" jdbcType="VARCHAR" property="serialno" />
+	    
+	    <association property="apply" javaType="com.adoptPet.userInterface.entity.ApplyInfoEx">
+		<id column="appserialNo" jdbcType="VARCHAR" property="serialno" />
+	    <result column="appserialNo2" jdbcType="VARCHAR" property="serialno2" />
+	    <result column="appuName" jdbcType="VARCHAR" property="uname" />
+	    <result column="answer1" jdbcType="VARCHAR" property="answer1" />
+	    <result column="answer2" jdbcType="VARCHAR" property="answer2" />
+	    <result column="answer3" jdbcType="VARCHAR" property="answer3" />
+	    <result column="applyTime" jdbcType="TIMESTAMP" property="applytime" />
+	    <result column="appStatus" jdbcType="INTEGER" property="appstatus" />
+		    
+		</association>
+	    
+	    
+	    <association property="adopt" javaType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		 	<id column="adoserialNo" jdbcType="VARCHAR" property="serialno" />
+		    <result column="adouName" jdbcType="VARCHAR" property="uname" />
+		    <result column="title" jdbcType="VARCHAR" property="title" />
+		    <result column="image1" jdbcType="VARCHAR" property="image1" />
+		    <result column="image2" jdbcType="VARCHAR" property="image2" />
+		    <result column="image3" jdbcType="VARCHAR" property="image3" />
+		    <result column="image4" jdbcType="VARCHAR" property="image4" />
+		    <result column="address" jdbcType="VARCHAR" property="address" />
+		    <result column="question1" jdbcType="VARCHAR" property="question1" />
+		    <result column="question2" jdbcType="VARCHAR" property="question2" />
+		    <result column="question3" jdbcType="VARCHAR" property="question3" />
+		    <result column="adoStatus" jdbcType="INTEGER" property="adostatus" />
+		    <result column="type" jdbcType="VARCHAR" property="type" />
+		    <result column="publishTime" jdbcType="TIMESTAMP" property="publishtime" />
+		    
+		</association>
+	    
+	    
+		<association property="user" javaType="com.adoptPet.userInterface.entity.UserEx">
+		 	<!-- <id column="uName" jdbcType="VARCHAR" property="uname" /> -->
+		    <result column="phoneNo" jdbcType="VARCHAR" property="phoneno" />
+		    <result column="upwd" jdbcType="VARCHAR" property="upwd" />
+		    <result column="uAddress" jdbcType="VARCHAR" property="uaddress" />
+		    <result column="signature" jdbcType="VARCHAR" property="signature" />
+		    <result column="uimage" jdbcType="VARCHAR" property="uimage" />
+		    <result column="registerTime" jdbcType="TIMESTAMP" property="registertime" />
+		    <result column="urole" jdbcType="INTEGER" property="urole" />
+		    
+		    <result column="status" jdbcType="INTEGER" property="status" />
+		    
+		</association>
+		
+	</resultMap>
+	
+	<!-- 查询我发出的申请 -->
+	<sql id="queryMyApplyslist">
+		adoptinfo.serialNo as adoserialNo, adoptinfo.uName as adouName, title, image1, image2, 
+		image3, image4, adoptinfo.address, question1, question2, 
+    question3, adoStatus, type, publishTime,applyinfo.serialNo as appserialNo, serialNo2 as appserialNo2, 
+    applyinfo.uName as appuName, answer1, answer2, answer3, applyTime, appStatus,
+    phoneNo, upwd, uAddress, signature, uimage, registerTime, urole, status
+	</sql>
+	<select id="queryMyApplys" parameterType="java.lang.String" resultMap="resultMyApplyList">
+		select
+		<include refid="queryMyApplyslist" />
+		FROM `user`,applyinfo,adoptinfo
+		<where>
+			applyinfo.uName=#{uname} 
+			AND applyinfo.serialNo2=adoptinfo.serialNo 
+			AND `user`.uName = adoptinfo.uName
+		</where>
+		order by applyTime desc
+	</select>
+	
+	<!-- 申请通过，改变状态 -->
+	<update id="updateStatus" parameterType="com.adoptPet.userInterface.entity.ApplyInfoEx">
+		update applyinfo
+		<set>
+			<if test="serialno != null">
+				appstatus = 1
+				<where>
+					serialno = #{serialno}
+				</where>
+			</if>
+		</set>
+	</update>
 </mapper>

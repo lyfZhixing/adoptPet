@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.QueryMyApply;
 import com.adoptPet.userInterface.entity.User;
 import com.adoptPet.userInterface.service.AdoptService;
 import com.adoptPet.userInterface.service.UserService;
@@ -43,6 +44,7 @@ public class IndexController {
 			List<AdoptinfoEx> dogs = adoptService.queryTypePublish("狗狗");
 			List<AdoptinfoEx> cats = adoptService.queryTypePublish("猫咪");
 			List<AdoptinfoEx> others = adoptService.queryTypePublish("其他");
+			
 			request.setAttribute("newPublishs", newPublishs);
 			request.setAttribute("dogs", dogs);
 			request.setAttribute("cats", cats);
@@ -69,6 +71,8 @@ public class IndexController {
 				List<ApplyInfoEx> pubApplys = adoptService.querypubApplys(myPublishs);
 				request.setAttribute("myPublishs", myPublishs);
 				request.setAttribute("pubApplys", pubApplys);
+				List<QueryMyApply> myApplys = adoptService.queryMyApplys(uname);
+				request.setAttribute("myApplys", myApplys);
 				view = "personal/personal";
 			} catch (Exception e) {
 				e.printStackTrace();

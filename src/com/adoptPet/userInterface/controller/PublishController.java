@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.QueryMyApply;
 import com.adoptPet.userInterface.entity.User;
 import com.adoptPet.userInterface.service.AdoptService;
 import com.alibaba.fastjson.JSON;
@@ -56,6 +57,31 @@ public class PublishController {
 				request.setAttribute("myPublishs", myPublishs);
 				request.setAttribute("pubApplys", pubApplys);
 				view = "personal/myPublish";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return view;
+	}
+	
+
+	/**查看更多我的申请*/
+	@RequestMapping("/toMyApply")
+	public String toMyApply(){
+		
+		String view = "redirect:/index/index.action";
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if(user == null){
+			view = "redirect:/index/index.action";
+		}else{
+			String uname = user.getUname();
+			try {
+				
+				List<QueryMyApply> myApplys = adoptService.queryMyApplys(uname);
+				request.setAttribute("myApplys", myApplys);
+				view = "personal/myApply";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

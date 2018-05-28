@@ -5,6 +5,7 @@ import java.util.List;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.QueryMyApply;
 
 
 /**
@@ -53,6 +54,12 @@ public interface AdoptService {
 
 	/**新增申请*/
 	int apply(String serialno2, String uname, String answer1, String answer2, String answer3)throws Exception;
+
+	/**确认领养，改变两表状态*/
+	int updateStatuses(String serialno, String serialno2)throws Exception;
+
+	/**查找我的申请*/
+	List<QueryMyApply> queryMyApplys(String uname)throws Exception;
 	
 	
 	

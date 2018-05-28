@@ -1,0 +1,9 @@
+/**
+	myApply.jsp页面继承自myPublish.jsp 大部分样式用的是myPublish.css
+*/
+.myapp_infobt{
+	width: 52px;
+	height: 52px;
+	float: right;
+	margin-right: 20px;
+}

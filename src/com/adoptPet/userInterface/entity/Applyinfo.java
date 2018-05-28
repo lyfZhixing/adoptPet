@@ -17,7 +17,7 @@ public class Applyinfo {
 
     private Date applytime;
 
-    private Integer appstatus;
+    private Integer appstatus; //0 审核 1 通过 2不通过
 
     public String getSerialno() {
         return serialno;

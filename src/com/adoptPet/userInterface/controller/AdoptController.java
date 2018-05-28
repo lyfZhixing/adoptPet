@@ -45,17 +45,18 @@ public class AdoptController {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		String json = "";
 		if(user == null){
-			
-		}
-		String json = JSON.toJSONString(false);
-		try {
-			int result = adoptService.apply(serialno2,user.getUname(),answer1,answer2,answer3);
-			if(result > 0){
-				json = JSON.toJSONString(true);
+			json = JSON.toJSONString(false);
+		}else{
+			try {
+				int result = adoptService.apply(serialno2,user.getUname(),answer1,answer2,answer3);
+				if(result > 0){
+					json = JSON.toJSONString(true);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		return json;

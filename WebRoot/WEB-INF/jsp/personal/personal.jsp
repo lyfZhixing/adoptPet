@@ -55,48 +55,78 @@
                     <div class="publish">
                         <div class="head_left">
                             <span>发布的领养：</span>
-                            <span class="adopt_more" id="adopt_more">更多></span>
-                            <div style="clear: both"></div>
+                            
+                            <c:if test="${myPublishs.size() == 0}">
+                            	<div style="clear: both"></div>
+                            	<div class="no-info">
+                            		<div class="content-2" style="width:400px;font-style: italic">您还没有发布过领养信息，点我现在发布……</div>
+                            	</div>
+                            </c:if>
+                            
+                            <c:if test="${myPublishs.size() != 0}">
+	                            <a class="adopt_more" id="adopt_more">更多></a>
+	                            <div style="clear: both"></div>
+                            	<div class="adoptinfos">
+	                       		<c:forEach var="myPublish" items="${myPublishs}" begin="0" end="1" step="1" >
+			                       	 <div class="adopt-info">
+			                            <img src="http://www.jq22.com/img/cs/500x300a.png">
+			                            <p>${myPublish.title}</p>
+			                            <div class="apply_num">已申请人数：${myPublish.count }人</div>
+			                            <div class="status">状态：
+											<c:if test="${myPublish.adostatus == 0 }">
+												审核中
+											</c:if>
+											<c:if test="${myPublish.adostatus == 1 }">
+												发布中
+											</c:if>
+											<c:if test="${myPublish.adostatus == 2 }">
+												审核不通过
+											</c:if>
+											<c:if test="${myPublish.adostatus == 3 }">
+												已下架
+											</c:if>
+										</div>
+			                        </div>
+		                       </c:forEach>
+		                       </div>
+                    
+                            </c:if>
+                            
+                            
                         </div>
                         
-                       <div class="adoptinfos">
-                       		<c:forEach var="myPublish" items="${myPublishs}" begin="0" end="1" step="1" >
-                       	 <div class="adopt-info">
-                            <img src="http://www.jq22.com/img/cs/500x300a.png">
-                            <p>${myPublish.title}</p>
-                            <div class="apply_num">已申请人数：${myPublish.count }人</div>
-                            <div class="status">状态：
-								<c:if test="${myPublish.adostatus == 0 }">
-									审核中
-								</c:if>
-								<c:if test="${myPublish.adostatus == 1 }">
-									发布中
-								</c:if>
-								<c:if test="${myPublish.adostatus == 2 }">
-									审核不通过
-								</c:if>
-								<c:if test="${myPublish.adostatus == 3 }">
-									已下架
-								</c:if>
-							</div>
-                        </div>
-                       </c:forEach>
-                       </div>
+                       
                     </div>
                     <div style="clear: both"></div>
                     <div class="apply">
                         <div class="head_left">
                             <span>申请的领养：</span>
-                            <a href="#">更多></a>
+                            <a class="adopt_more" id="apply_more">更多></a>
                             <div style="clear: both"></div>
                         </div>
                         
-                        <div class="apply-info">
-                            <a href="#"><img src="http://www.jq22.com/img/cs/500x300a.png"></a>
-                            <p>金毛2年免费送样……</p>
-                            <div class="apply_num">已申请人数：5人</div>
-                            <div class="status">状态：发布中</div>
+                        <div class="adoptinfos">
+                       		<c:forEach var="myApply" items="${myApplys}" begin="0" end="1" step="1" >
+                       	 <div class="apply-info">
+                            <img src="http://www.jq22.com/img/cs/500x300a.png">
+                            <p>${myApply.adopt.title}</p>
+                            <%-- <div class="apply_num">已申请人数：${myPublish.count }人</div> --%>
+                            <div class="status">申请状态：
+                            	<c:if test="${myApply.apply.appstatus != 1 && myApply.adopt.adostatus == 3 }">
+									未通过
+								</c:if>
+								<c:if test="${myApply.apply.appstatus == 0 && myApply.adopt.adostatus != 3}">
+									审核中
+								</c:if>
+								<c:if test="${myApply.apply.appstatus == 1 }">
+									已通过
+								</c:if>
+								
+								
+							</div>
                         </div>
+                       </c:forEach>
+                       </div>
                     </div>
                 </div>
                 <div style="clear: both"></div>

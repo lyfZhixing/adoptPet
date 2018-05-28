@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.QueryMyApply;
 import com.adoptPet.userInterface.mapper.AdoptinfoMapperEx;
 import com.adoptPet.userInterface.mapper.ApplyinfoMapperEx;
 import com.adoptPet.userInterface.service.AdoptService;
@@ -157,6 +158,25 @@ public class AdoptServiceImpl implements AdoptService {
 			result = applyinfoMapperEx.insert(apply);
 		}
 		return result ;
+	}
+
+	@Override
+	public int updateStatuses(String serialno, String serialno2)throws Exception {
+		int result = -1;
+		ApplyInfoEx apply = new ApplyInfoEx();
+		apply.setSerialno(serialno);
+		apply.setSerialno2(serialno2);
+		int result1 =  applyinfoMapperEx.updateStatus(apply);
+		int result2 =  adoptinfoMapperEx.updateStatus(apply);
+		result = result1 * result2;
+		return result;
+	}
+
+	@Override
+	public List<QueryMyApply> queryMyApplys(String uname) throws Exception {
+		
+		
+		return applyinfoMapperEx.queryMyApplys(uname);
 	}
 
 }

@@ -9,25 +9,28 @@ import com.adoptPet.userInterface.entity.ApplyInfoEx;
 public interface AdoptinfoMapperEx {
 
 	/**发布信息*/
-	int insert(Adoptinfo adoptInfo);
+	int insert(Adoptinfo adoptInfo)throws Exception;
 
 	/**查询我的发布*/
-	List<AdoptinfoEx> queryByUname(String uname);
+	List<AdoptinfoEx> queryByUname(String uname)throws Exception;
 	
 	/**查询发布下的申请*/
-	List<ApplyInfoEx> querypubApplys(String serialno);
+	List<ApplyInfoEx> querypubApplys(String serialno)throws Exception;
 
 	/**查询最新发布*/
-	List<AdoptinfoEx> queryNewPublish();
+	List<AdoptinfoEx> queryNewPublish()throws Exception;
 
 	/**分类首页展示*/
-	List<AdoptinfoEx> queryTypePublish(String type);
+	List<AdoptinfoEx> queryTypePublish(String type)throws Exception;
 
 	/**计数*/
-	List<ApplyInfoEx> queryCount(String serialno);
+	List<ApplyInfoEx> queryCount(String serialno)throws Exception;
 
 	/**查看信息详情*/
-	AdoptinfoEx queryAdoptBySerialno(String serialno);
+	AdoptinfoEx queryAdoptBySerialno(String serialno)throws Exception;
+
+	/**修改发布状态*/
+	int updateStatus(ApplyInfoEx apply)throws Exception;
 
 	
 }

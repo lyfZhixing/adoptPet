@@ -18,9 +18,9 @@ $("#s-answer").click(function(){
 			   data: {"answer1":answer1,"answer2":answer2,"answer3":answer3,"serialno2":serialno2},
 			   dataType: "json",
 			   success: function(msg){
-				   alert(msg);
 			     if(msg == "true"){
 			    	 alert("申请成功!");
+			    	 window.location.href=$("#PageContext").val()+"/index/index.action"
 			     }else{
 			    	 alert("提交申请失败，请勿重复申请！！");
 			     }
@@ -29,6 +29,13 @@ $("#s-answer").click(function(){
 	}else{
 		alert("请填写答案！");
 	}
-	
-	
 });
+
+/**撤销返回*/
+$("#c-answer").click(function(){
+	 window.location.href=$("#PageContext").val()+"/index/index.action"
+});
+
+
+
+

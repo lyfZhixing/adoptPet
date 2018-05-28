@@ -71,9 +71,11 @@
 	
 	margin-left: 50px;
 	width: 100%;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
-
+.a_title h4{
+	margin-top: 10px;
+}
 
 
 .question{
