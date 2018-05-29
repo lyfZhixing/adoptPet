@@ -46,8 +46,6 @@ public class ApplyController {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return json;
 	}
 	

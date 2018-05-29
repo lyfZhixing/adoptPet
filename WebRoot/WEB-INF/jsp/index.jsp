@@ -32,7 +32,7 @@
         <div class="index-search content">
             <div class="index-search ">
                 <div class="search-detial" >
-                    <h3 id="ipAddress">北京</h3>
+                    <h3 id="ipAddress">郑州</h3>
                     <div class="search-tog">切换</div>
                     <input type="text">
                     <img src="../img/u45.png" alt="">
@@ -63,7 +63,7 @@
         <div class="index-latest content">
             <div class="latest-title">
                 <h2>最新发布：</h2>
-                <p>更多>></p>
+                <p id="showmore">更多>></p>
                 <div style="clear: both"></div>
             </div>
             <div class="latest-detial">
@@ -83,13 +83,14 @@
         <div class="index-dog content">
             <div class="latest-title">
                 <h2><img src="../img/u83.png" alt="">狗狗：</h2>
-                <p>更多>></p>
+                <p id="showmore">更多>></p>
                 <div style="clear: both"></div>
             </div>
             <div class="dog-detial">
                 <c:forEach var="dog" items="${dogs}" begin="0" end="7" step="1">
 	            	<div class="latest-det">
 	                    <img src="../img/u45.png" alt="">
+	                    <input type="hidden" value="${dog.serialno}"/>
 	                    <h4>${dog.title}</h4>
 	                    <p>已申请人数：${dog.count }人</p>
 	                    <p>发布人：${dog.uname }</p>
@@ -101,13 +102,14 @@
         <div class="index-cat content">
             <div class="latest-title">
                 <h2><img src="../img/u67.png" alt="">猫咪：</h2>
-                <p>更多>></p>
+                <p id="showmore">更多>></p>
                 <div style="clear: both"></div>
             </div>
             <div class="cat-detial">
                 <c:forEach var="cat" items="${cats}" begin="0" end="7" step="1">
 	            	<div class="latest-det">
 	                    <img src="../img/u45.png" alt="">
+	                    <input type="hidden" value="${cat.serialno}"/>
 	                    <h4>${cat.title}</h4>
 	                    <p>已申请人数：${cat.count }人</p>
 	                    <p>发布人：${cat.uname }</p>
@@ -118,13 +120,14 @@
         <div class="index-other content">
             <div class="latest-title">
                 <h2><img src="../img/u75.png" alt="">其他：</h2>
-                <p>更多>></p>
+                <p id="showmore">更多>></p>
                 <div style="clear: both"></div>
             </div>
             <div class="other-detial">
                 <c:forEach var="other" items="${others}" begin="0" end="7" step="1">
 	            	<div class="latest-det">
 	                    <img src="../img/u45.png" alt="">
+	                    <input type="hidden" value="${other.serialno}"/>
 	                    <h4>${other.title}</h4>
 	                    <p>已申请人数：${other.count }人</p>
 	                    <p>发布人：${other.uname }</p>

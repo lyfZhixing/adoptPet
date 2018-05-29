@@ -55,9 +55,15 @@
 				code like '${_parameter}' and code not like '%00'
 			</otherwise>
 		</choose>
-		
-			
 		</where> 
 	</select>
+	<!-- 查询区 -->
+	<select id="selectCitys" resultMap="districtList" parameterType="java.lang.String">
+		select id, name, suffix, code, area_code, `order` from district 
+		<where>
+			code like '${_parameter}' and code not like '%00'
+		</where> 
+	</select>
+	
 	
 </mapper>

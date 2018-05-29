@@ -10,10 +10,15 @@ import org.springframework.stereotype.Service;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.District;
 import com.adoptPet.userInterface.entity.QueryMyApply;
+import com.adoptPet.userInterface.entity.QueryTrem;
 import com.adoptPet.userInterface.mapper.AdoptinfoMapperEx;
 import com.adoptPet.userInterface.mapper.ApplyinfoMapperEx;
+import com.adoptPet.userInterface.mapper.DistrictMapperEx;
 import com.adoptPet.userInterface.service.AdoptService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class AdoptServiceImpl implements AdoptService {
@@ -22,6 +27,8 @@ public class AdoptServiceImpl implements AdoptService {
 	private AdoptinfoMapperEx adoptinfoMapperEx;
 	@Autowired
 	private ApplyinfoMapperEx applyinfoMapperEx;
+	@Autowired
+	private DistrictMapperEx districtMapperEx;
 	@Override
 	public int saveAdopt(Adoptinfo t) throws Exception {
 		// TODO Auto-generated method stub
@@ -106,9 +113,11 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 
 	@Override
-	public List<AdoptinfoEx> queryNewPublish() throws Exception {
+	public List<AdoptinfoEx> queryNewPublish(String city) throws Exception {
+		QueryTrem qt = new QueryTrem();
+		qt.setCity("%"+city+"%");
 		List<AdoptinfoEx> adoptinfos1 = new ArrayList<>();
-		List<AdoptinfoEx> adoptinfos = adoptinfoMapperEx.queryNewPublish();
+		List<AdoptinfoEx> adoptinfos = adoptinfoMapperEx.queryNewPublish(qt);
 		for(AdoptinfoEx adoptinfo : adoptinfos){
 			int count = adoptinfoMapperEx.queryCount(adoptinfo.getSerialno()).size();
 			adoptinfo.setCount(count);
@@ -118,9 +127,13 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 
 	@Override
-	public List<AdoptinfoEx> queryTypePublish(String type) throws Exception {
+	public List<AdoptinfoEx> queryTypePublish(String type , String city) throws Exception {
+		
+		QueryTrem qt = new QueryTrem();
+		qt.setCity("%"+city+"%");
+		qt.setType(type);
 		List<AdoptinfoEx> adoptinfos1 = new ArrayList<>();
-		List<AdoptinfoEx> adoptinfos = adoptinfoMapperEx.queryTypePublish(type);
+		List<AdoptinfoEx> adoptinfos = adoptinfoMapperEx.queryTypePublish(qt);
 		for(AdoptinfoEx adoptinfo : adoptinfos){
 			int count = adoptinfoMapperEx.queryCount(adoptinfo.getSerialno()).size();
 			adoptinfo.setCount(count);
@@ -177,6 +190,31 @@ public class AdoptServiceImpl implements AdoptService {
 		
 		
 		return applyinfoMapperEx.queryMyApplys(uname);
+	}
+
+	@Override
+	public PageInfo<AdoptinfoEx> selectMore(String city, String type, Integer pagenum, Integer pagesize)
+			throws Exception {
+		QueryTrem qt = new QueryTrem();
+		if(city != null){
+			qt.setCity("%"+city+"%");
+		}
+		
+		qt.setType(type);
+		pagenum = pagenum == null?1:pagenum;
+		pagesize = pagesize == null?16:pagesize;
+	    PageHelper.startPage(pagenum, pagesize);
+	    List<AdoptinfoEx> list = adoptinfoMapperEx.selectMore(qt);
+	    //用PageInfo对结果进行包装
+	    PageInfo<AdoptinfoEx> page = new PageInfo<AdoptinfoEx>(list);
+	    
+		return page;
+	}
+
+	@Override
+	public List<District> selectCitys(String city) throws Exception {
+		
+		return districtMapperEx.selectCitys(city);
 	}
 
 }

@@ -36,14 +36,16 @@ public class IndexController {
 	
 	/**首页*/
 	@RequestMapping("/index")
-	public String toIndex(){
-		
+	public String toIndex(String city){
+		if(city == null || city.equals("")){
+			city = "&&郑州&&";
+		}
 		try {
 			//最新发布
-			List<AdoptinfoEx> newPublishs = adoptService.queryNewPublish();
-			List<AdoptinfoEx> dogs = adoptService.queryTypePublish("狗狗");
-			List<AdoptinfoEx> cats = adoptService.queryTypePublish("猫咪");
-			List<AdoptinfoEx> others = adoptService.queryTypePublish("其他");
+			List<AdoptinfoEx> newPublishs = adoptService.queryNewPublish(city);
+			List<AdoptinfoEx> dogs = adoptService.queryTypePublish("狗狗",city);
+			List<AdoptinfoEx> cats = adoptService.queryTypePublish("猫咪",city);
+			List<AdoptinfoEx> others = adoptService.queryTypePublish("其他",city);
 			
 			request.setAttribute("newPublishs", newPublishs);
 			request.setAttribute("dogs", dogs);

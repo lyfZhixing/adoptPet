@@ -5,7 +5,9 @@ import java.util.List;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.District;
 import com.adoptPet.userInterface.entity.QueryMyApply;
+import com.github.pagehelper.PageInfo;
 
 
 /**
@@ -44,10 +46,10 @@ public interface AdoptService {
 	List<ApplyInfoEx> querypubApplys(List<AdoptinfoEx> myPublishs)throws Exception;
 
 	/**查询最新发布*/
-	List<AdoptinfoEx> queryNewPublish()throws Exception;
+	List<AdoptinfoEx> queryNewPublish(String city)throws Exception;
 
 	/**分类首页展示*/
-	List<AdoptinfoEx> queryTypePublish(String type)throws Exception;
+	List<AdoptinfoEx> queryTypePublish(String type , String city)throws Exception;
 
 	/**查看信息详情*/
 	AdoptinfoEx queryAdoptBySerialno(String serialno)throws Exception;
@@ -60,6 +62,12 @@ public interface AdoptService {
 
 	/**查找我的申请*/
 	List<QueryMyApply> queryMyApplys(String uname)throws Exception;
+
+	/**分页查询领养信息*/
+	PageInfo<AdoptinfoEx> selectMore(String city, String type, Integer pagenum, Integer pagesize)throws Exception;
+
+	/**查找区县*/
+	List<District> selectCitys(String city)throws Exception;
 	
 	
 	

@@ -80,18 +80,18 @@
 	
 	
 	
-	<select id="queryNewPublish" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+	<select id="queryNewPublish" parameterType="com.adoptPet.userInterface.entity.QueryTrem" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
 		select publishTime,serialNo,uName,title from adoptinfo
 		<where>
-			adoStatus=1
+			adoStatus=1 and address like #{city}
 		</where>
 		order by publishTime desc limit 0,8
 	</select>
 	
-	<select id="queryTypePublish" parameterType="java.lang.String" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+	<select id="queryTypePublish" parameterType="com.adoptPet.userInterface.entity.QueryTrem" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
 		select publishTime, serialNo,uName,title from adoptinfo
 		<where>
-			adoStatus=1 and type=#{type}
+			adoStatus=1 and type=#{type} and address like #{city}
 		</where>
 		order by publishTime desc limit 0,8
 	</select>
@@ -114,4 +114,21 @@
 			</if>
 		</set>
 	</update>
+	
+	
+	<select id="selectMore" parameterType="com.adoptPet.userInterface.entity.QueryTrem" resultType="com.adoptPet.userInterface.entity.AdoptinfoEx">
+		select publishTime, serialNo,uName,title from adoptinfo
+		<where>
+			adoStatus=1
+			<if test="type != null">
+				 and type=#{type}
+			</if>
+			<if test="city != null">
+				 and address like #{city}
+			</if>
+		</where>
+		order by publishTime desc
+	</select>
+	
+	
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import com.adoptPet.userInterface.entity.Adoptinfo;
 import com.adoptPet.userInterface.entity.AdoptinfoEx;
 import com.adoptPet.userInterface.entity.ApplyInfoEx;
+import com.adoptPet.userInterface.entity.QueryTrem;
 
 public interface AdoptinfoMapperEx {
 
@@ -18,10 +19,10 @@ public interface AdoptinfoMapperEx {
 	List<ApplyInfoEx> querypubApplys(String serialno)throws Exception;
 
 	/**查询最新发布*/
-	List<AdoptinfoEx> queryNewPublish()throws Exception;
+	List<AdoptinfoEx> queryNewPublish(QueryTrem qt)throws Exception;
 
 	/**分类首页展示*/
-	List<AdoptinfoEx> queryTypePublish(String type)throws Exception;
+	List<AdoptinfoEx> queryTypePublish(QueryTrem qt)throws Exception;
 
 	/**计数*/
 	List<ApplyInfoEx> queryCount(String serialno)throws Exception;
@@ -31,6 +32,9 @@ public interface AdoptinfoMapperEx {
 
 	/**修改发布状态*/
 	int updateStatus(ApplyInfoEx apply)throws Exception;
+
+	/**查询更多*/
+	List<AdoptinfoEx> selectMore(QueryTrem qt)throws Exception;
 
 	
 }

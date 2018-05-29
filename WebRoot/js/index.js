@@ -24,14 +24,46 @@ $(function() {
 /**弹出地址选择框*/
 $(".search-tog").click(function () {
     $(".search-choice").toggle();
+    findPro();
+    
 });
+/**省市联动*/
+$(".search-choice").on("click","#s_pro",function(){
+	var code = $("#s_pro").val();
+	findCity(code);
+});
+
+/**按钮*/
+$(".sea-1").click(function () {
+	var procode = $("#s_pro").val();
+	var citycode = $("#s_city").val();
+	var code;
+	if(procode == citycode){
+		code = procode.substring(0,2);
+	}else{
+		code = citycode.substring(0,4);
+	}
+	var flag = $(this).next("input").val();
+	if(flag == "showMore"){
+		window.location.href=$("#PageContext").val()+"/queryIndex/showMore.action?citycode="+code+"&city="+$("#s_city").find("option:selected").text();
+		/*$(".search-detial h3").text($("#s_city").text());*/
+	}
+   
+});
+$(".sea-2").click(function () {
+    $(".search-choice").toggle();
+});
+
 /**查看详情*/
 $(".latest-det img").click(function () {
 	var serialno = $(this).next("input").val();
 	window.location.href=$("#PageContext").val()+"/adopt/info.action?serialno="+serialno;
 });
 
-
+/*发布领养*/
+$(".index-release").click(function () {
+    window.location.href=$("#PageContext").val()+"/personal/publish.action";
+});
 
 var t;
 var index = 0;
@@ -149,6 +181,9 @@ $("#lunbobox ul li,.lunbo a img,#toright,#toleft ").hover(
         }
     });
 
+	$("#showmore").click(function(){
+		window.location.href=$("#PageContext").val()+"/queryIndex/showMore.action";
+	});
 
 
 

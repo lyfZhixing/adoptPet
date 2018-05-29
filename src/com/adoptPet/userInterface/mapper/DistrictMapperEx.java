@@ -16,4 +16,7 @@ public interface DistrictMapperEx {
 	
 	/**根据市查询县*/
 	List<District> queryCounty(String code) throws Exception;
+
+	/**查询区县*/
+	List<District> selectCitys(String city)throws Exception;
 }

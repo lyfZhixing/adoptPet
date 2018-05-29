@@ -33,7 +33,8 @@ $("#s-answer").click(function(){
 
 /**撤销返回*/
 $("#c-answer").click(function(){
-	 window.location.href=$("#PageContext").val()+"/index/index.action"
+	 /*window.location.href=$("#PageContext").val()+"/index/index.action"*/
+	window.history.back(-1); 
 });
 
 
